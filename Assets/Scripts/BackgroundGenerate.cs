@@ -10,7 +10,7 @@ public class BackgroundGenerate : MonoBehaviour
     {
         for (int y = 0; y < 6; y++)
         {
-            for (int x = 0; x < 11; x++)
+            for (int x = 0; x < 7; x++)
             {
                GameObject cube  = Instantiate(backCube, new Vector2(x, y), Quaternion.identity);
 
