@@ -15,21 +15,32 @@ public class AnimationController : MonoBehaviour
         EventsController.playerRunAnimationEvent.AddListener(OnRun);
         EventsController.playerPushAnimationEvent.AddListener(OnPush);
         EventsController.playerIdleAnimationEvent.AddListener(OnIdle);
+        EventsController.playerDirectionEvent.AddListener(OnChangeDirection);
+    }
+
+    private void OnChangeDirection(int arg0)
+    {
+        FlipPlayer(arg0);
     }
 
     private void OnIdle()
     {
-        throw new NotImplementedException();
+        anim.SetBool("Run", false);
+        //print("ANIM IDLE");
     }
 
     private void OnPush()
     {
-        throw new NotImplementedException();
+        //print("ANIM PUSH");
+        anim.Play("Player_push");
+        anim.SetBool("Run", true);
     }
 
     private void OnRun()
     {
-        throw new NotImplementedException();
+        //print("ANIM RUN");
+        anim.Play("Player_run");
+        anim.SetBool("Run", true);
     }
 
     private void FlipPlayer(int x)
@@ -49,6 +60,7 @@ public class AnimationController : MonoBehaviour
         EventsController.playerRunAnimationEvent.RemoveAllListeners();
         EventsController.playerPushAnimationEvent.RemoveAllListeners();
         EventsController.playerIdleAnimationEvent.RemoveAllListeners();
+        EventsController.playerDirectionEvent.RemoveAllListeners();
     }
 
  

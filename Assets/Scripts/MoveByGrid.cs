@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class MoveByGrid : MonoBehaviour
 {
+    public int x;
+    public int y;
 
-    public IEnumerator NewMovePlayerGrid(Vector2 direction)
+    private void Awake()
     {
-        float elapseTime = 0;
+        EventsController.NextLevelEvent.AddListener(OnLevelUp);
+    }
 
-        Vector2 originPos = transform.position;
-        Vector2 targetPos = originPos + direction;
+    private void OnLevelUp()
+    {
+        y -= 1;
+    }
+
+    public IEnumerator NewMovePlayerGrid(Vector2Int destination)
+    {        
+        float elapseTime = 0;        
+        Vector2 originPos = transform.position; 
+        Vector2 targetPos = destination;
 
         while (elapseTime < MainConfig.speedMove)
         {
@@ -19,19 +30,21 @@ public class MoveByGrid : MonoBehaviour
             yield return null;
         }
 
+
         transform.position = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
     }
 
 
     public bool IsPoleEmpty(Vector2Int direction)
     {
-        Vector2Int poleForCheck = Vector2Int.RoundToInt(transform.position) + direction;
+        Vector2Int poleForCheck = new Vector2Int(x, y) + direction;
         return GridController.CheckPole(poleForCheck);
     }
 
-    public Vector2Int GetMoveCoord(Vector2Int direction)
+    public Vector2Int GetMoveDestination(Vector2Int direction)
     {
-        return Vector2Int.RoundToInt(transform.position) + direction;
+        //Debug.Log("GetMoveDestination: " + direction + " , x:" + x + ", y:" + y);  
+        return new Vector2Int(x + direction.x, y + direction.y + SystemStatic.level);
     }
 
 }
