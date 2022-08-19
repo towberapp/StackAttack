@@ -17,10 +17,20 @@ public class SystemUiController : MonoBehaviour
     private void Awake()
     {
         restart.onClick.AddListener(RestartGame);
+        
         intervalSlider.onValueChanged.AddListener(OnIntervalChange);
         speedSlider.onValueChanged.AddListener(OnSpeedChange);
+
+        
         EventsController.GameOverEvent.AddListener(OnGameOver);
 
+        Debug.Log("AWAKE SYSTEM UI");
+
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("DESTROY");
     }
 
     private void OnSpeedChange(float sliderSpeed)
@@ -37,10 +47,16 @@ public class SystemUiController : MonoBehaviour
     private void OnGameOver()
     {
         textSystem.text = "GameOver!";
+        Invoke(nameof(RestartSceneInvoke), 1.0f);        
     }
 
 
     public void RestartGame()
+    {
+        EventsController.GameOverEvent.Invoke();
+    }
+
+    private void RestartSceneInvoke()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

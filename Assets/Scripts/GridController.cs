@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public class GridController : MonoBehaviour
 {
-    [SerializeField] private int xPoleConfig = 7;
+    //[SerializeField] private int xPoleConfig = 7;
     [SerializeField] private int yPoleConfig = 6;
 
     public static int[,] mainGrid;
@@ -12,10 +13,24 @@ public class GridController : MonoBehaviour
     public static int yPole;
 
     private void Awake()
-    {        
-        xPole = xPoleConfig;
+    {
+        EventsController.PreStartEvent.AddListener(OnPreStartGame);
+    }
+
+    private void OnPreStartGame(int row)
+    {
+        //creat array
+        //print("ROW: " + row);
+
+        xPole = row;
         yPole = yPoleConfig;
         mainGrid = new int[xPole, yPole];
+        blockGrid = new GameObject[xPole, yPole];
+
+        Debug.Log("START");
+
+        EventsController.StartEvent.Invoke();
+        SystemStatic.isStartGame = true;
     }
 
     public static bool CheckPole(Vector2Int pos)
@@ -81,15 +96,24 @@ public class GridController : MonoBehaviour
         mainGrid[x + move.x, y + move.y] = 1;
         mainGrid[x, y] = 0;
 
-        ShowGrid();
+        //ShowGrid();
 
         CheckForNexLevel();
         CheckForGameOver();
+
+        EventsController.UpgradeGridEvent.Invoke();
     }
 
-    private static void CheckForGameOver()
+    public static void DeleteCube(int x, int y)
     {
-        
+        blockGrid[x, y] = null;
+        mainGrid[x, y] = 0;
+    }
+
+
+
+    private static void CheckForGameOver()
+    {        
     }
 
     private static void CheckForNexLevel()

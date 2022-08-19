@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,42 @@ public class IndividualBlockControl : MonoBehaviour
 
     MoveByGrid moveByGrid;
     private IEnumerator coroutine;
+    private bool isMoving = false;
 
     private void Awake()
     {
         moveByGrid = GetComponent<MoveByGrid>();
-    }
+        EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
+        EventsController.CheckForBrakeEvent.AddListener(OnCheckBrake);
+        EventsController.GameOverEvent.AddListener(OnGameOver);
+    }  
 
     private void Start()
     {        
         StartCoroutine(StartMoveBlock(Vector2Int.zero));
+    }
+
+    private void OnGameOver()
+    {
+        //Destroy(gameObject);
+    }
+
+
+    private void OnCheckBrake(Vector2 checkPos)
+    {
+        Vector2Int pos = new(moveByGrid.x, moveByGrid.y);
+        if (pos == checkPos && !SystemStatic.isGameOver)
+        {
+            Debug.Log("CUBE BRAKE!!!!");
+            GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnChageGrid()
+    {
+        if (!isMoving)
+            StartCoroutine(StartMoveBlock(Vector2Int.zero));
     }
 
     // checkToMove
@@ -33,7 +61,8 @@ public class IndividualBlockControl : MonoBehaviour
     }
 
     private IEnumerator StartMoveBlock(Vector2Int direction)
-    {        
+    {
+        isMoving = true;
 
         if (direction != Vector2Int.zero)
         {
@@ -46,31 +75,20 @@ public class IndividualBlockControl : MonoBehaviour
         }
 
 
-        while (moveByGrid.IsPoleEmpty(Vector2Int.down))
-        {
-            Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
-            GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, Vector2Int.down);                       
-            moveByGrid.y -= 1;
+        if (moveByGrid.y >= 0)
+            while (moveByGrid.IsPoleEmpty(Vector2Int.down))
+            {
+                Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
+                GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, Vector2Int.down);                       
+                moveByGrid.y -= 1;
+                coroutine = moveByGrid.NewMovePlayerGrid(destination);
+                yield return StartCoroutine(coroutine);
+            }
 
-            CheckPlayerHead();
-
-            coroutine = moveByGrid.NewMovePlayerGrid(destination);
-            yield return StartCoroutine(coroutine);
-        }
+        isMoving = false;
 
     }
 
-    private void CheckPlayerHead()
-    {
-        //print("CHECK DEATH : " + MainConfig.playerX + " - " + MainConfig.playerY);
-        //print("CHECK DEATH moveByGrid : " + moveByGrid.x + " - " + moveByGrid.y);
-
-        if (MainConfig.playerX == moveByGrid.x && MainConfig.playerY == moveByGrid.y)
-        {
-            //gameover
-            //EventsController.GameOverEvent.Invoke();
-        }
-    }
 
 
 }

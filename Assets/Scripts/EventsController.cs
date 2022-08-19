@@ -9,9 +9,15 @@ public class EventsController : MonoBehaviour
     // GameStatus
     public static UnityEvent GameOverEvent = new();
     public static UnityEvent StartEvent = new();
+    public static UnityEvent<int> PreStartEvent = new();
+
+
     public static UnityEvent NextLevelEvent = new();
 
+    public static UnityEvent UpgradeGridEvent = new();
+
     public static UnityEvent<int, int, Vector2[]> moveCubeEvent = new();
+    public static UnityEvent<Vector2> CheckForBrakeEvent = new();
 
     // player Animation
     public static UnityEvent playerRunAnimationEvent = new();
@@ -28,8 +34,7 @@ public class EventsController : MonoBehaviour
     private void OnGameOver()
     {
         print("GAME OVER EVENTS");
-        SystemStatic.isGameOver = true;
-        Time.timeScale = 0;
+        SystemStatic.isGameOver = true;        
     }
 
     private void OnDestroy()
@@ -37,5 +42,16 @@ public class EventsController : MonoBehaviour
         GameOverEvent.RemoveAllListeners();
         StartEvent.RemoveAllListeners();
         NextLevelEvent.RemoveAllListeners();
+        PreStartEvent.RemoveAllListeners();
+        UpgradeGridEvent.RemoveAllListeners();
+        moveCubeEvent.RemoveAllListeners();
+        CheckForBrakeEvent.RemoveAllListeners();
+
+        playerRunAnimationEvent.RemoveAllListeners();
+        playerPushAnimationEvent.RemoveAllListeners();
+        playerIdleAnimationEvent.RemoveAllListeners();
+        playerDirectionEvent.RemoveAllListeners();
+
+
     }
 }

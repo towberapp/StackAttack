@@ -31,9 +31,8 @@ public class LevelController : MonoBehaviour
             GridController.mainGrid[x, GridController.yPole - 1] = 0;
         }
 
-        print("--- ON LEVEL UP ---");
-        ShowGrid();
-        print("---  ---");
+        //ShowGrid();
+
     }
 
     private void ShowGrid()
@@ -60,7 +59,7 @@ public class LevelController : MonoBehaviour
             elapseTime += Time.deltaTime;
             yield return null;
         }
-        obj.transform.position = new Vector3(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y), originPos.z);
+        obj.transform.position = new Vector3(originPos.x, Mathf.Round(targetPos.y), originPos.z);
     }
 
 

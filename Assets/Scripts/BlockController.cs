@@ -11,8 +11,8 @@ public class BlockController : MonoBehaviour
 
     private void Start()
     {
-        GridController.blockGrid = new GameObject[GridController.xPole, GridController.yPole];
-        SetBlockFromArray(GridController.mainGrid);      
+        //GridController.blockGrid = new GameObject[GridController.xPole, GridController.yPole];
+        //SetBlockFromArray(GridController.mainGrid);      
     }
 
     private void SetBlockFromArray(int[,] arr)

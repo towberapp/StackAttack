@@ -23,15 +23,15 @@ public class MoveByGrid : MonoBehaviour
         Vector2 originPos = transform.position; 
         Vector2 targetPos = destination;
 
-        while (elapseTime < MainConfig.speedMove)
+        while (elapseTime < MainConfig.speedMove && !SystemStatic.isGameOver)
         {
             transform.position = Vector3.Lerp(originPos, targetPos, (elapseTime / MainConfig.speedMove));
             elapseTime += Time.deltaTime;
             yield return null;
         }
 
-
-        transform.position = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
+        if (!SystemStatic.isGameOver)
+            transform.position = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
     }
 
 

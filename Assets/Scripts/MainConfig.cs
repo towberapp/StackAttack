@@ -28,12 +28,14 @@ public class MainConfig : MonoBehaviour
         SystemStatic.level = 0;
         SystemStatic.isGameOver = false;
         SystemStatic.isGamePaused = false;
+        SystemStatic.isStartGame = false;
     }
 }
 
 
 public class SystemStatic
 {
+    public static bool isStartGame = false;
     public static bool isGameOver = false;
     public static bool isGamePaused = false;
     public static int level = 0;

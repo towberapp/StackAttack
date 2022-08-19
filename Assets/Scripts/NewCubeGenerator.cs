@@ -11,14 +11,10 @@ public class NewCubeGenerator : MonoBehaviour
 
     private float time = 0.0f;
 
-    private void Start()
-    {
-       
-    }
 
     private void Update()
     {
-        if (!SystemStatic.isGameOver) 
+        if (!SystemStatic.isGameOver && SystemStatic.isStartGame) 
         { 
             time += Time.deltaTime;
             if (time >= MainConfig.intervalCube)
@@ -31,8 +27,9 @@ public class NewCubeGenerator : MonoBehaviour
 
 
     private void NewBlock()
-    {        
-        int x = GetEmptyCoord();
+    {
+        int x = GetEmptyCoord();        
+
         if (x >= 0)
         {
             GetNewBlock(x);
@@ -40,14 +37,16 @@ public class NewCubeGenerator : MonoBehaviour
         {
             EventsController.GameOverEvent.Invoke();
             SystemStatic.isGameOver = true;
+            SystemStatic.isStartGame = false;
+
             Debug.LogWarning("GAME OVER");
         }
     }
 
     private void GetNewBlock(int x)
     {
-        //int x = Random.Range(0, GridController.xPole-1);
-        int y = GridController.yPole-1; 
+
+        int y = GridController.yPole-1;
 
         GameObject obj = Instantiate(cube, new Vector2(x, y + SystemStatic.level), Quaternion.identity, cubeFolder.transform);
 
@@ -60,8 +59,6 @@ public class NewCubeGenerator : MonoBehaviour
         MoveByGrid moveByGrid = obj.GetComponent<MoveByGrid>();
         moveByGrid.x = x;
         moveByGrid.y = y;
-
-        //print("COORD: " + x + "," + y);
 
         GridController.blockGrid[x, y] = obj;
         GridController.mainGrid[x, y] = 1;
