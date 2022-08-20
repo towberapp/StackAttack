@@ -4,7 +4,7 @@ using UnityEngine;
 public class GridController : MonoBehaviour
 {
     //[SerializeField] private int xPoleConfig = 7;
-    [SerializeField] private int yPoleConfig = 6;
+    //[SerializeField] private int yPoleConfig = 6;
 
     public static int[,] mainGrid;
     public static GameObject[,] blockGrid;
@@ -19,11 +19,8 @@ public class GridController : MonoBehaviour
 
     private void OnPreStartGame(int row)
     {
-        //creat array
-        //print("ROW: " + row);
-
         xPole = row;
-        yPole = yPoleConfig;
+        yPole = Convert.ToInt16(xPole * 0.9f);
         mainGrid = new int[xPole, yPole];
         blockGrid = new GameObject[xPole, yPole];
 

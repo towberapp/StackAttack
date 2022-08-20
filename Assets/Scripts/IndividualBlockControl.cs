@@ -14,7 +14,10 @@ public class IndividualBlockControl : MonoBehaviour
     {
         moveByGrid = GetComponent<MoveByGrid>();
         EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
+
+        // TODO: delete late
         EventsController.CheckForBrakeEvent.AddListener(OnCheckBrake);
+
         EventsController.GameOverEvent.AddListener(OnGameOver);
     }  
 
@@ -28,15 +31,20 @@ public class IndividualBlockControl : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    public void DestroyCube()
+    {
+        GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+        Destroy(gameObject);
+    }
 
+
+    // TODO: delete late
     private void OnCheckBrake(Vector2 checkPos)
     {
         Vector2Int pos = new(moveByGrid.x, moveByGrid.y);
         if (pos == checkPos && !SystemStatic.isGameOver)
         {
-            Debug.Log("CUBE BRAKE!!!!");
-            GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
-            Destroy(gameObject);
+            DestroyCube();
         }
     }
 

@@ -8,6 +8,8 @@ using TMPro;
 public class StartMenuController : MonoBehaviour
 {
 
+    [SerializeField] private int row = 9;
+
     [SerializeField] private GameObject startMenu;
     [SerializeField] private Button startButton;
     [SerializeField] private TMP_Dropdown selectRow;
@@ -22,8 +24,8 @@ public class StartMenuController : MonoBehaviour
     private void OnStart()
     {            
         startMenu.SetActive(false);
+        //row = Convert.ToInt16(selectRow.options[selectRow.value].text);
 
-        int row = Convert.ToInt16(selectRow.options[selectRow.value].text);
         EventsController.PreStartEvent.Invoke(row);
     }
 

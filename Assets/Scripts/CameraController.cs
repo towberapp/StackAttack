@@ -30,9 +30,7 @@ public class CameraController : MonoBehaviour
         scaleheight = windowaspect / targetaspect;
 
         cam.orthographicSize /= scaleheight;
-        transform.position = new Vector3(transform.position.x, transform.position.y / scaleheight, transform.position.z);
+        //transform.position = new Vector3(transform.position.x, transform.position.y / scaleheight, transform.position.z);
     }
-
-
 
 }

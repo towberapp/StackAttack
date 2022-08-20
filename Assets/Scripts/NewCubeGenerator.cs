@@ -10,6 +10,7 @@ public class NewCubeGenerator : MonoBehaviour
     [SerializeField] private Sprite[] spriteBlock; 
 
     private float time = 0.0f;
+    private int lastRand = -1;
 
 
     private void Update()
@@ -81,17 +82,21 @@ public class NewCubeGenerator : MonoBehaviour
             }                
         }
 
-        //print("xPole: " + (GridController.xPole - 1));
-        //print("count: " + count);
 
-        // if net mest
         if (count == GridController.xPole)
         {           
             return -1;
         }
-
         int[] terms = termsList.ToArray();
+        
         int randItem = Random.Range(0, terms.Length);
+
+        while (randItem == lastRand)
+        {
+            randItem = Random.Range(0, terms.Length);
+        }
+
+        lastRand = randItem;
 
         return terms[randItem];
     }

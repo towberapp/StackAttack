@@ -9,7 +9,7 @@ public class MoveController : MonoBehaviour
     private bool isListenKey;
     private Vector2Int lastKey;
     MoveByGrid moveByGrid;
-
+    //private bool isCanChangeDirection = true;
    
 
     private void Awake()
@@ -120,6 +120,25 @@ public class MoveController : MonoBehaviour
     }
 
 
+    private Vector2Int ChangeDirection(Vector2Int direction) 
+    {
+        if (direction == (Vector2Int.left + Vector2Int.up))
+        {
+            if (moveByGrid.IsPoleEmpty(Vector2Int.left)) return direction;
+
+            return Vector2Int.up;
+        }
+
+        if (direction == (Vector2Int.right + Vector2Int.up))
+        {
+            if (moveByGrid.IsPoleEmpty(Vector2Int.right)) return direction;
+
+            return Vector2Int.up;
+        }
+
+        return direction;
+    }
+
     private IEnumerator StartMovePlayer(Vector2Int direction)
     {        
 
@@ -127,15 +146,16 @@ public class MoveController : MonoBehaviour
 
         if (IsCanPlayerMove(direction) && direction != Vector2Int.zero)
         {
-            EventsController.playerDirectionEvent.Invoke(direction.x);
-            Vector2Int destination = moveByGrid.GetMoveDestination(direction);
-            moveByGrid.x += direction.x;
-            moveByGrid.y += direction.y;
+
+            Vector2Int newDirection = ChangeDirection(direction);
+
+            EventsController.playerDirectionEvent.Invoke(newDirection.x);
+            Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
+            moveByGrid.x += newDirection.x;
+            moveByGrid.y += newDirection.y;
 
             MainConfig.playerX = moveByGrid.x;
             MainConfig.playerY = moveByGrid.y;
-
-            //print("DESTINATION: " + destination);
 
             yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));                     
         }
@@ -150,7 +170,7 @@ public class MoveController : MonoBehaviour
         if (nextDirection == Vector2Int.zero && direction == Vector2Int.up)
         {
             //Debug.Log("CHECK FOR BRAKE: " + moveByGrid.x + "," + (moveByGrid.y + 1));
-            EventsController.CheckForBrakeEvent.Invoke(new Vector2Int(moveByGrid.x, (moveByGrid.y + 1)));
+            //EventsController.CheckForBrakeEvent.Invoke(new Vector2Int(moveByGrid.x, (moveByGrid.y + 1)));
         }
 
         if (nextDirection != Vector2Int.zero)
@@ -195,16 +215,15 @@ public class MoveController : MonoBehaviour
 
     private bool IsCanPlayerMove(Vector2Int direction)
     {
-        if (direction == (Vector2Int.left + Vector2Int.up))
+    /*    if (direction == (Vector2Int.left + Vector2Int.up))
         {
-
             return moveByGrid.IsPoleEmpty(Vector2Int.left);
         }
            
         if (direction == (Vector2Int.right + Vector2Int.up))
         {
-            return moveByGrid.IsPoleEmpty(Vector2Int.right);
-        }
+             return moveByGrid.IsPoleEmpty(Vector2Int.right);
+        }*/
         
         if (direction == Vector2Int.left)
         {
