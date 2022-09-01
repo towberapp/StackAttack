@@ -9,14 +9,13 @@ public class IndividualBlockControl : MonoBehaviour
 
     MoveByGrid moveByGrid;
     private IEnumerator coroutine;
-    private bool isMoving = false;
+    private bool isMoving = true;
     SpriteRenderer rend;
 
     private void Awake()
     {
         moveByGrid = GetComponent<MoveByGrid>();
         EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
-        EventsController.GameOverEvent.AddListener(OnGameOver);
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
         rend = GetComponent<SpriteRenderer>();
     }
@@ -29,13 +28,9 @@ public class IndividualBlockControl : MonoBehaviour
 
     private void Start()
     {        
-        StartCoroutine(StartMoveBlock(Vector2Int.zero));
+        StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
     }
 
-    private void OnGameOver()
-    {
-        //Destroy(gameObject);
-    }
 
     public void DestroyCube()
     {
@@ -50,7 +45,7 @@ public class IndividualBlockControl : MonoBehaviour
         if (!isMoving && moveByGrid.y > 0)
         {            
             if (moveByGrid.IsPoleEmpty(Vector2Int.down))
-                StartCoroutine(StartMoveBlock(Vector2Int.zero));
+                StartCoroutine(StartMoveBlock(Vector2Int.zero, 2));
         }
     }
 
@@ -66,13 +61,15 @@ public class IndividualBlockControl : MonoBehaviour
                 EventsController.playerPushAnimationEvent.Invoke();
                         
             GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, direction);
-            StartCoroutine(StartMoveBlock(direction));
+            StartCoroutine(StartMoveBlock(direction, 3));
         }
     }
 
-    private IEnumerator StartMoveBlock(Vector2Int direction)
+    private IEnumerator StartMoveBlock(Vector2Int direction, int fn = 0)
     {
-        //Debug.Log("START MOVE BLOCK");
+        //Debug.Log("fn: " + fn + ", START MOVE! :" + moveByGrid.id );
+
+        if (SystemStatic.isGameOver) yield break;
 
         isMoving = true;
 
@@ -91,9 +88,11 @@ public class IndividualBlockControl : MonoBehaviour
             while (moveByGrid.IsPoleEmpty(Vector2Int.down))
             {
                 Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
+                
                 GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, Vector2Int.down);                       
-                moveByGrid.y -= 1;
+                moveByGrid.y -= 1;                
                 coroutine = moveByGrid.NewMovePlayerGrid(destination);
+
                 yield return StartCoroutine(coroutine);
             }
         
@@ -135,7 +134,6 @@ public class IndividualBlockControl : MonoBehaviour
     private void OnDestroy()
     {
         EventsController.UpgradeGridEvent.RemoveListener(OnChageGrid);
-        EventsController.GameOverEvent.RemoveListener(OnGameOver);
         EventsController.NextLevelEvent.RemoveListener(OnLevelUp);
     }
 }

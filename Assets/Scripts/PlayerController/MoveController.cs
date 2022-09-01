@@ -8,7 +8,7 @@ public class MoveController : MonoBehaviour
     [SerializeField] Vector2Int playerPos = Vector2Int.zero;
 
     private bool isListenKey;
-    private Vector2Int lastKey;
+    private Vector2Int lastKey , lastDirection;
     MoveByGrid moveByGrid;
    
 
@@ -129,30 +129,36 @@ public class MoveController : MonoBehaviour
 
         // up
         if (Input.GetKey(KeyCode.W) || keyUp) OnClickControl(Vector2Int.up);
+
+       /* if (isListenKey && lastDirection != lastKey && lastKey != Vector2Int.zero)
+        {
+            Debug.Log("MOVE!!! : " + lastKey);
+        }*/
     }
 
 
     private void OnClickControl(Vector2Int direction)
     {
-        lastKey = direction;
+        lastKey = direction;        
+        if (!isListenKey) return;
 
-        if (!isListenKey) return;       
-
+        lastDirection = direction;
         StartCoroutine(StartMovePlayer(direction));        
     }
 
     private IEnumerator StartMovePlayer(Vector2Int direction)
     {
 
+        if (SystemStatic.isGameOver) yield break;
         isListenKey = false;
         moveByGrid.isMove = true;
 
-        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero)
+        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero && !SystemStatic.isGameOver)
         {
             Vector2Int newDirection = ChangeDirection(direction);
             EventsController.playerDirectionEvent.Invoke(newDirection.x);
             Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
-            
+
             ChangePos(newDirection);
 
             yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
@@ -161,51 +167,82 @@ public class MoveController : MonoBehaviour
         Vector2Int nextDirection = GetNextDirection(direction);
 
         if (nextDirection != Vector2Int.zero)
-            if (!moveByGrid.IsPoleEmpty(nextDirection + Vector2Int.down))
+        {
+            //if (!moveByGrid.IsPoleEmpty(nextDirection + Vector2Int.down))
+            {
                 if (IsCanPlayerMove(nextDirection))
                 {
+                    lastDirection = nextDirection;
+
                     EventsController.playerDirectionEvent.Invoke(nextDirection.x);
                     Vector2Int destination = moveByGrid.GetMoveDestination(nextDirection);
                     ChangePos(nextDirection);
                     yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
                 }
+            }
+        }
 
         while (moveByGrid.IsPoleEmpty(Vector2Int.down))
         {
             Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
             ChangePos(Vector2Int.down);
-
+            lastKey = Vector2Int.down;
             yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
         }
 
         EventsController.playerIdleAnimationEvent.Invoke();
+
+
+      /*  Debug.Log("direction:" + direction);
+        Debug.Log("next direction:" + nextDirection);
+        Debug.Log("lastkey:" + lastKey);*/
+
+        // check special cube
         isListenKey = true;
         moveByGrid.isMove = false;
 
-
-
-        if (moveByGrid.y > 0)
+        // move in special cube 
+        if (moveByGrid.y > 0)// && lastKey == nextDirection || moveByGrid.y>0 && nextDirection == Vector2Int.zero)
         {
             Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
             GameObject obj = GridController.GetBlockByPos(pos);            
             // if down is block
             if (obj.GetComponent<CubeGlobal>() != null)
-            {               
-                Vector2Int moveNow = obj.GetComponent<CubeGlobal>().moveLenta;
+            {
+                CubeGlobal cube = obj.GetComponent<CubeGlobal>();
+                
+                // lentaCube
+                Vector2Int moveNow = cube.moveLenta;
+                int jumpHeight = cube.jumpHeight;
+
+                //funblock 
+                if (jumpHeight > 1)
+                {
+                    StartCoroutine(StartMovePlayer(Vector2Int.up*2));
+                    lastKey = Vector2Int.up;
+                }
+
+                // if moving block
                 if (moveNow != Vector2Int.zero)
                 {
-                    Debug.Log("MOVE BY LENTA: " + moveNow);
-                    StartCoroutine(StartMovePlayer(moveNow));
+                    if (lastKey != Vector2Int.up)
+                    {
+                        if (moveByGrid.IsPoleEmpty(moveNow))
+                            StartCoroutine(StartMovePlayer(moveNow));
+                    } else
+                    {
+                        StartCoroutine(StartMovePlayer(Vector2Int.up));
+                    }
+
                 }
             }
         }
-
 
     }
 
     private void ChangePos(Vector2Int dir)
     {
-        Debug.Log("CHANGE POS: " + dir);
+        //Debug.Log("CHANGE POS: " + dir);
 
         GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, dir, 2);
 
@@ -240,13 +277,7 @@ public class MoveController : MonoBehaviour
             {
                 return Vector2Int.up;
             }
-
-            GameObject obj = GridController.GetBlockByPos(new Vector2Int(moveByGrid.x, moveByGrid.y-1));
-            if (obj == null) return Vector2Int.up;
-
-            CubeGlobal glob = obj.GetComponent<CubeGlobal>();
             
-            return Vector2Int.up * glob.jumpHeight;
         }
 
         return direction;
@@ -281,9 +312,7 @@ public class MoveController : MonoBehaviour
     private Vector2Int GetNextDirection(Vector2Int direction)
     {
         Vector2Int nextDirection;
-
         if (direction == (Vector2Int.left + Vector2Int.up)) {
-
             return Vector2Int.left;
         }
 
@@ -293,7 +322,12 @@ public class MoveController : MonoBehaviour
         }
 
         if (direction == Vector2Int.up && lastKey != Vector2Int.up && (lastKey == Vector2Int.left || lastKey == Vector2Int.right))
-        { 
+        {
+            return lastKey;
+        }
+
+        if (direction == Vector2Int.up*2 && lastKey != Vector2Int.up && (lastKey == Vector2Int.left || lastKey == Vector2Int.right))
+        {
             return lastKey;
         }
 

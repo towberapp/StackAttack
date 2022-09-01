@@ -34,6 +34,29 @@ public class NewCubeGenerator : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        EventsController.StartEvent.AddListener(OnStartGame);
+    }
+
+    private void OnStartGame()
+    {
+/*        TestGenerator(2, 0);
+        TestGenerator(3, 1);
+        TestGenerator(4, 1);*/
+    }
+
+
+    private void TestGenerator(int x, int count) 
+    {
+        int y = GridController.yPole - 1;
+        Vector2Int pos = new Vector2Int(x, y + SystemStatic.level);
+        Vector2Int arrayPos = new(x, y);
+        
+        GameObject obj = GenerateSpecialObj(pos, count);
+        SetCoords(arrayPos, obj);
+    }
+
 
     private void NewBlock()
     {
@@ -56,6 +79,7 @@ public class NewCubeGenerator : MonoBehaviour
         int y = GridController.yPole - 1;
 
         Vector2Int pos = new Vector2Int(x, y + SystemStatic.level);
+        Vector2Int arrayPos = new(x, y);
 
         //random simple special
         int getRandom = Random.Range(1,11);
@@ -68,24 +92,29 @@ public class NewCubeGenerator : MonoBehaviour
             obj = GeneratSimpleBlock(pos);
         } else
         {
-            obj = GenerateSpecialObj(pos);
+            int blockInt = Random.Range(0, specialBlock.Length);
+            obj = GenerateSpecialObj(pos, blockInt);
         }
 
+        SetCoords(arrayPos, obj);
+    }
+
+
+    private void SetCoords(Vector2Int pos, GameObject obj)
+    {
         obj.GetComponent<SpriteRenderer>().sortingOrder = MainConfig.countCubeSet + 10;
 
         MoveByGrid moveByGrid = obj.GetComponent<MoveByGrid>();
-        moveByGrid.x = x;
-        moveByGrid.y = y;
+        moveByGrid.x = pos.x;
+        moveByGrid.y = pos.y;
 
-        GridController.blockGrid[x, y] = obj;
-        GridController.mainGrid[x, y] = 1;
+        GridController.blockGrid[pos.x, pos.y] = obj;
+        GridController.mainGrid[pos.x, pos.y] = 1;
     }
 
-    private GameObject GenerateSpecialObj(Vector2Int pos)
-    {
-        int blockInt = Random.Range(0, specialBlock.Length);        
+    private GameObject GenerateSpecialObj(Vector2Int pos, int blockInt)
+    {             
         GameObject obj = Instantiate(specialBlock[blockInt], ((Vector3Int)pos), Quaternion.identity, cubeFolder.transform);
-
         return obj;
     }
 

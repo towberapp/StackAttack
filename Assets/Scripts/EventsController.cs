@@ -33,8 +33,7 @@ public class EventsController : MonoBehaviour
 
     private void OnGameOver()
     {
-        print("GAME OVER EVENTS");
-        SystemStatic.isGameOver = true;        
+        Time.timeScale = 0;
     }
 
     private void OnDestroy()

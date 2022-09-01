@@ -40,11 +40,9 @@ public class GridController : MonoBehaviour
 
     public static bool CheckPole(Vector2Int pos)
     {
-        //print("CHECK POLE: " + pos);
-        //ShowGrid();
+        if (IsOutOfRange(pos)) return false;
+        if (IsInArray(pos)) return false;
 
-        if (pos.x < 0 || pos.y < 0 || pos.x >= xPole || pos.y >= yPole) return false;
-        if (mainGrid[pos.x, pos.y] == 1) return false;
         return true;
     }
 
@@ -57,7 +55,7 @@ public class GridController : MonoBehaviour
 
     public static bool IsInArray(Vector2Int pos)
     {
-        if (mainGrid[pos.x, pos.y] == 1) return true;
+        if (mainGrid[pos.x, pos.y] == 1 || mainGrid[pos.x, pos.y] == 2) return true;
         return false;
     }
 
@@ -73,6 +71,8 @@ public class GridController : MonoBehaviour
       
         if (!IsOutOfRange(blockPos) && IsInArray(blockPos))
         {
+            Debug.Log("MOVE BLOCK: " + blockPos);
+
             //print("MOVE BLOCK IN ARRAR: " + blockPos);
             GameObject block = blockGrid[blockPos.x, blockPos.y];
             IndividualBlockControl 
@@ -80,14 +80,6 @@ public class GridController : MonoBehaviour
                 individualBlockControl.MoveBlock(direction);
         }
 
-        /*if (!IsOutOfRange(blockTop) && IsInArray(blockTop))
-        {
-            //print("MOVE BLOCK IN ARRAR: " + blockPos);
-            GameObject block = blockGrid[blockTop.x, blockTop.y];
-            IndividualBlockControl
-                individualBlockControl = block.GetComponent<IndividualBlockControl>();
-                individualBlockControl.MoveBlock(direction);
-        }*/
     }
 
 
