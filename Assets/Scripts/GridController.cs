@@ -24,11 +24,19 @@ public class GridController : MonoBehaviour
         mainGrid = new int[xPole, yPole];
         blockGrid = new GameObject[xPole, yPole];
 
-        Debug.Log("START");
+        //Debug.Log("START");
 
         EventsController.StartEvent.Invoke();
         SystemStatic.isStartGame = true;
     }
+
+
+    public static GameObject GetBlockByPos(Vector2Int pos)
+    {
+        if (IsOutOfRange(pos)) return null;        
+        return blockGrid[pos.x, pos.y];
+    }
+
 
     public static bool CheckPole(Vector2Int pos)
     {
@@ -40,15 +48,6 @@ public class GridController : MonoBehaviour
         return true;
     }
 
-    private static void ShowGrid()
-    {
-        for (int y = 0; y < yPole; y++)
-            for (int x = 0; x < xPole; x++)
-                if (mainGrid[x, y] == 1)
-                    Debug.LogFormat("In GRID: {0}, {1}", x, y);
-
-        Debug.Log("-------------------");
-    }
 
     public static bool IsOutOfRange(Vector2Int pos)
     {
@@ -65,7 +64,9 @@ public class GridController : MonoBehaviour
 
     public static void MoveBlock(Vector2Int blockPos, Vector2Int direction)
     {
-        if (!IsOutOfRange(blockPos) && !IsInArray(blockPos))
+        Vector2Int blockTop = blockPos + Vector2Int.up;
+
+        if (!IsOutOfRange(blockPos) && !IsInArray(blockPos) && !IsInArray(blockTop))
         {
             EventsController.playerRunAnimationEvent.Invoke();
         }
@@ -77,12 +78,23 @@ public class GridController : MonoBehaviour
             IndividualBlockControl 
                 individualBlockControl = block.GetComponent<IndividualBlockControl>();
                 individualBlockControl.MoveBlock(direction);
-        } 
+        }
+
+        /*if (!IsOutOfRange(blockTop) && IsInArray(blockTop))
+        {
+            //print("MOVE BLOCK IN ARRAR: " + blockPos);
+            GameObject block = blockGrid[blockTop.x, blockTop.y];
+            IndividualBlockControl
+                individualBlockControl = block.GetComponent<IndividualBlockControl>();
+                individualBlockControl.MoveBlock(direction);
+        }*/
     }
 
 
-    public static void UpdateGrid(int x, int y, Vector2Int move)
-    {       
+    public static void UpdateGrid(int x, int y, Vector2Int move, int type = 1)
+    {
+        //Debug.Log("UPDATE GRID");
+
         if (move == Vector2Int.zero) return;
 
         //print("UPDATE GRID: " + x + "," + y + " -> " + move);
@@ -90,7 +102,7 @@ public class GridController : MonoBehaviour
         blockGrid[x + move.x, y + move.y] = blockGrid[x, y];
         blockGrid[x, y] = null;
 
-        mainGrid[x + move.x, y + move.y] = 1;
+        mainGrid[x + move.x, y + move.y] = type;
         mainGrid[x, y] = 0;
 
         //ShowGrid();
@@ -105,6 +117,17 @@ public class GridController : MonoBehaviour
     {
         blockGrid[x, y] = null;
         mainGrid[x, y] = 0;
+    }
+
+
+    private static void ShowGrid()
+    {
+        for (int y = 0; y < yPole; y++)
+            for (int x = 0; x < xPole; x++)
+                if (mainGrid[x, y] == 1)
+                    Debug.LogFormat("In GRID: {0}, {1}", x, y);
+
+        Debug.Log("-------------------");
     }
 
 

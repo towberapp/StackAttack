@@ -5,28 +5,50 @@ using UnityEngine.EventSystems;
 
 public class MoveController : MonoBehaviour
 {
+    [SerializeField] Vector2Int playerPos = Vector2Int.zero;
 
     private bool isListenKey;
     private Vector2Int lastKey;
     MoveByGrid moveByGrid;
-    //private bool isCanChangeDirection = true;
    
 
     private void Awake()
     {
         moveByGrid = GetComponent<MoveByGrid>();
         EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
+        EventsController.NextLevelEvent.AddListener(OnLevelUp);
+        EventsController.StartEvent.AddListener(OnStart);
+    }
+
+    private void OnStart()
+    {
+        // set user to array;
+        GridController.blockGrid[playerPos.x, playerPos.y] = gameObject;
+        GridController.mainGrid[playerPos.x, playerPos.y] = 2;
+    }
+
+    private void OnLevelUp()
+    {
+        moveByGrid.y -= 1;
+
+        if (moveByGrid.y < 0)
+        {
+            EventsController.GameOverEvent.Invoke();
+        }
     }
 
     private void OnChageGrid()
     {
-       if (isListenKey)
-           StartCoroutine(StartMovePlayer(Vector2Int.zero));
+        if (isListenKey && moveByGrid.IsPoleEmpty(Vector2Int.down))
+        {
+            Debug.Log("PLAYER START MOVE");
+            StartCoroutine(StartMovePlayer(Vector2Int.zero));
+        }
     }
 
     private void Start()
     {
-        transform.position = new Vector2(0f, 0f);
+        transform.position = (Vector2)playerPos;
         isListenKey = true;
     }
 
@@ -119,6 +141,82 @@ public class MoveController : MonoBehaviour
         StartCoroutine(StartMovePlayer(direction));        
     }
 
+    private IEnumerator StartMovePlayer(Vector2Int direction)
+    {
+
+        isListenKey = false;
+        moveByGrid.isMove = true;
+
+        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero)
+        {
+            Vector2Int newDirection = ChangeDirection(direction);
+            EventsController.playerDirectionEvent.Invoke(newDirection.x);
+            Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
+            
+            ChangePos(newDirection);
+
+            yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
+        }
+
+        Vector2Int nextDirection = GetNextDirection(direction);
+
+        if (nextDirection != Vector2Int.zero)
+            if (!moveByGrid.IsPoleEmpty(nextDirection + Vector2Int.down))
+                if (IsCanPlayerMove(nextDirection))
+                {
+                    EventsController.playerDirectionEvent.Invoke(nextDirection.x);
+                    Vector2Int destination = moveByGrid.GetMoveDestination(nextDirection);
+                    ChangePos(nextDirection);
+                    yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
+                }
+
+        while (moveByGrid.IsPoleEmpty(Vector2Int.down))
+        {
+            Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
+            ChangePos(Vector2Int.down);
+
+            yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
+        }
+
+        EventsController.playerIdleAnimationEvent.Invoke();
+        isListenKey = true;
+        moveByGrid.isMove = false;
+
+
+
+        if (moveByGrid.y > 0)
+        {
+            Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
+            GameObject obj = GridController.GetBlockByPos(pos);            
+            // if down is block
+            if (obj.GetComponent<CubeGlobal>() != null)
+            {               
+                Vector2Int moveNow = obj.GetComponent<CubeGlobal>().moveLenta;
+                if (moveNow != Vector2Int.zero)
+                {
+                    Debug.Log("MOVE BY LENTA: " + moveNow);
+                    StartCoroutine(StartMovePlayer(moveNow));
+                }
+            }
+        }
+
+
+    }
+
+    private void ChangePos(Vector2Int dir)
+    {
+        Debug.Log("CHANGE POS: " + dir);
+
+        GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, dir, 2);
+
+        moveByGrid.x += dir.x;
+        moveByGrid.y += dir.y;
+
+        MainConfig.playerX = moveByGrid.x;
+        MainConfig.playerY = moveByGrid.y;
+        
+    } 
+
 
     private Vector2Int ChangeDirection(Vector2Int direction) 
     {
@@ -136,95 +234,29 @@ public class MoveController : MonoBehaviour
             return Vector2Int.up;
         }
 
+        if (direction == Vector2Int.up)
+        {
+            if (moveByGrid.IsPoleEmpty(Vector2Int.down))
+            {
+                return Vector2Int.up;
+            }
+
+            GameObject obj = GridController.GetBlockByPos(new Vector2Int(moveByGrid.x, moveByGrid.y-1));
+            if (obj == null) return Vector2Int.up;
+
+            CubeGlobal glob = obj.GetComponent<CubeGlobal>();
+            
+            return Vector2Int.up * glob.jumpHeight;
+        }
+
         return direction;
     }
 
-    private IEnumerator StartMovePlayer(Vector2Int direction)
-    {        
-
-        isListenKey = false;
-
-        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero)
-        {
-
-            Vector2Int newDirection = ChangeDirection(direction);
-
-            EventsController.playerDirectionEvent.Invoke(newDirection.x);
-            Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
-            moveByGrid.x += newDirection.x;
-            moveByGrid.y += newDirection.y;
-
-            MainConfig.playerX = moveByGrid.x;
-            MainConfig.playerY = moveByGrid.y;
-
-            yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));                     
-        }
-        
-
-        Vector2Int nextDirection = GetNextDirection(direction);
-
-        //Debug.Log("DIRECTION: " + direction);
-        //Debug.Log("NEXT DIRECTION: " + nextDirection);
-
-        // check for CUBE to brake
-        if (nextDirection == Vector2Int.zero && direction == Vector2Int.up)
-        {
-            //Debug.Log("CHECK FOR BRAKE: " + moveByGrid.x + "," + (moveByGrid.y + 1));
-            //EventsController.CheckForBrakeEvent.Invoke(new Vector2Int(moveByGrid.x, (moveByGrid.y + 1)));
-        }
-
-        if (nextDirection != Vector2Int.zero)
-            if (!moveByGrid.IsPoleEmpty(nextDirection + Vector2Int.down)) 
-                if (IsCanPlayerMove(nextDirection))
-                {
-                    EventsController.playerDirectionEvent.Invoke(nextDirection.x);
-
-                    Vector2Int destination = moveByGrid.GetMoveDestination(nextDirection);
-                    moveByGrid.x += nextDirection.x;
-                    moveByGrid.y += nextDirection.y;
-
-                    MainConfig.playerX = moveByGrid.x;
-                    MainConfig.playerY = moveByGrid.y;
-                    yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
-                }
-
-        while (moveByGrid.IsPoleEmpty(Vector2Int.down))
-        {
-            Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
-            moveByGrid.y -= 1;            
-            MainConfig.playerY = moveByGrid.y;
-            yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
-        }
-
-        EventsController.playerIdleAnimationEvent.Invoke();
-        isListenKey = true;
-    }
-
-
-/*    private IEnumerator MovePlayerDown()
-    {
-        while (moveByGrid.IsPoleEmpty(Vector2Int.down))
-        {
-            Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
-            moveByGrid.y -= 1;
-            MainConfig.playerY = moveByGrid.y;
-            yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
-        }
-    }*/
 
 
     private bool IsCanPlayerMove(Vector2Int direction)
     {
-    /*    if (direction == (Vector2Int.left + Vector2Int.up))
-        {
-            return moveByGrid.IsPoleEmpty(Vector2Int.left);
-        }
-           
-        if (direction == (Vector2Int.right + Vector2Int.up))
-        {
-             return moveByGrid.IsPoleEmpty(Vector2Int.right);
-        }*/
-        
+
         if (direction == Vector2Int.left)
         {
             Vector2Int moveCoord = new Vector2Int(moveByGrid.x, moveByGrid.y) + direction;

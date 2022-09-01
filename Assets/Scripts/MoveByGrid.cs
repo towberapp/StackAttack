@@ -6,16 +6,7 @@ public class MoveByGrid : MonoBehaviour
 {
     public int x;
     public int y;
-
-    private void Awake()
-    {
-        EventsController.NextLevelEvent.AddListener(OnLevelUp);
-    }
-
-    private void OnLevelUp()
-    {
-        y -= 1;
-    }
+    public bool isMove = false;
 
     public IEnumerator NewMovePlayerGrid(Vector2Int destination)
     {        

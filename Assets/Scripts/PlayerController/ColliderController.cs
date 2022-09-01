@@ -14,16 +14,10 @@ public class ColliderController : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("COLLISION!!!");
-        //EventsController.GameOverEvent.Invoke();
-
         // check hight of jump
         if (transform.position.x == (float) moveByGrid.x)
         {
-            Debug.Log("check hight: " + (transform.position.y - SystemStatic.level - moveByGrid.y + 1));
-
-
-            if ((transform.position.y - SystemStatic.level - moveByGrid.y +1) > 0.6)
+            if ((transform.position.y - SystemStatic.level - moveByGrid.y + 1) > 0.6 && moveByGrid.isMove)
             {
                 collision.gameObject.SendMessage("DestroyCube");
             } else
@@ -32,7 +26,7 @@ public class ColliderController : MonoBehaviour
             }
         } else
         {
-           // EventsController.GameOverEvent.Invoke();
+            EventsController.GameOverEvent.Invoke();
         }
 
     }

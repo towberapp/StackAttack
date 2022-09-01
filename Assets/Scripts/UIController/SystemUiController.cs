@@ -14,18 +14,55 @@ public class SystemUiController : MonoBehaviour
     [SerializeField] private Slider intervalSlider;
     [SerializeField] private Slider speedSlider;
 
+    private bool isPause;
+
+    public void RestartGame()
+    {
+        EventsController.GameOverEvent.Invoke();
+        RestartSceneInvoke();
+    }
+
+    public void PauseGame()
+    {
+        SetPauseGame(!isPause);
+    }
+
+    //private
+
     private void Awake()
     {
         restart.onClick.AddListener(RestartGame);
         
         intervalSlider.onValueChanged.AddListener(OnIntervalChange);
         speedSlider.onValueChanged.AddListener(OnSpeedChange);
-
         
         EventsController.GameOverEvent.AddListener(OnGameOver);
+        EventsController.StartEvent.AddListener(OnStart);
 
         Debug.Log("AWAKE SYSTEM UI");
+    }
 
+    private void Start()
+    {
+        SetPauseGame(true);
+    }
+
+    private void OnStart()
+    {
+        SetPauseGame(false);
+    }
+
+    private void SetPauseGame (bool status)
+    {
+        if (status)
+        {
+            isPause = true;
+            Time.timeScale = 0;
+        } else
+        {
+            isPause = false;
+            Time.timeScale = 1;
+        }
     }
 
     private void OnDestroy()
@@ -47,14 +84,9 @@ public class SystemUiController : MonoBehaviour
     private void OnGameOver()
     {
         textSystem.text = "GameOver!";
-        Invoke(nameof(RestartSceneInvoke), 1.0f);        
+        //Invoke(nameof(RestartSceneInvoke), 1.0f);        
     }
 
-
-    public void RestartGame()
-    {
-        EventsController.GameOverEvent.Invoke();
-    }
 
     private void RestartSceneInvoke()
     {
