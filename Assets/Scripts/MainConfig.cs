@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MainConfig : MonoBehaviour
 {
-    [SerializeField] private float _speedMove = 1f;
-    [SerializeField] private float _interval = 4f;
-
     public static float speedMove;
     public static float intervalCube;
 
@@ -17,8 +14,8 @@ public class MainConfig : MonoBehaviour
 
     private void Awake()
     {
-        speedMove = _speedMove;
-        intervalCube = _interval;
+/*        speedMove = _speedMove;
+        intervalCube = _interval;*/
 
         countCubeSet = 0;
 
@@ -39,4 +36,6 @@ public class SystemStatic
     public static bool isGameOver = false;
     public static bool isGamePaused = false;
     public static int level = 0;
+    public static int levelRecord;
+    public static int coin;
 }

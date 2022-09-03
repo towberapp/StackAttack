@@ -14,7 +14,7 @@ public class ColliderController : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // check hight of jump
+        // check hight of jump        
         if (transform.position.x == (float) moveByGrid.x)
         {
             if ((transform.position.y - SystemStatic.level - moveByGrid.y + 1) > 0.6 && moveByGrid.isMove)

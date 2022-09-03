@@ -71,7 +71,7 @@ public class GridController : MonoBehaviour
       
         if (!IsOutOfRange(blockPos) && IsInArray(blockPos))
         {
-            Debug.Log("MOVE BLOCK: " + blockPos);
+           // Debug.Log("MOVE BLOCK: " + blockPos);
 
             //print("MOVE BLOCK IN ARRAR: " + blockPos);
             GameObject block = blockGrid[blockPos.x, blockPos.y];

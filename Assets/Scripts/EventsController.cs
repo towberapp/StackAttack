@@ -13,7 +13,6 @@ public class EventsController : MonoBehaviour
 
 
     public static UnityEvent NextLevelEvent = new();
-
     public static UnityEvent UpgradeGridEvent = new();
 
     public static UnityEvent<int, int, Vector2[]> moveCubeEvent = new();
@@ -25,16 +24,7 @@ public class EventsController : MonoBehaviour
     public static UnityEvent playerIdleAnimationEvent = new();
     public static UnityEvent<int> playerDirectionEvent = new();
 
-    private void Awake()
-    {
-        Time.timeScale = 1;
-        GameOverEvent.AddListener(OnGameOver);
-    }
 
-    private void OnGameOver()
-    {
-        Time.timeScale = 0;
-    }
 
     private void OnDestroy()
     {

@@ -50,13 +50,14 @@ public class IndividualBlockControl : MonoBehaviour
     }
 
     // checkToMove
-    public void MoveBlock(Vector2Int direction, bool auto = false)
+    public void MoveBlock(Vector2Int direction, bool auto = true)
     {
         bool isEmpty = moveByGrid.IsPoleEmpty(direction);
         bool isEmptyUp = moveByGrid.IsPoleEmpty(Vector2Int.up);        
 
         if (isEmpty && isEmptyUp)
         {
+            Debug.Log("CHECK AUTO: " + auto);
             if (auto)
                 EventsController.playerPushAnimationEvent.Invoke();
                         

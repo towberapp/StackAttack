@@ -7,15 +7,18 @@ public class LevelController : MonoBehaviour
 {
 
     [SerializeField] private GameObject moveFolder;
+    readonly PlayerPrefsController playerpref = new();
 
     private void Awake()
     {
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
+        SystemStatic.levelRecord = playerpref.GetLevelRecord();
     }
  
 
     private void OnLevelUp()
     {
+        playerpref.UpdateRecordLevel();
         StartCoroutine(MoveObject(Camera.main.gameObject));       
 
         for (int y = 0; y < GridController.yPole-1; y++)

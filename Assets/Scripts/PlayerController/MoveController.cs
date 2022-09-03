@@ -114,26 +114,24 @@ public class MoveController : MonoBehaviour
     void Update()
     {
 
-
-        // left
-        if (Input.GetKey(KeyCode.A) || keyLeft) OnClickControl(Vector2Int.left);
-        
-        // right
-        if (Input.GetKey(KeyCode.D) || keyRight) OnClickControl(Vector2Int.right);
-        
-        // upleft
-        if (Input.GetKey(KeyCode.Q) || keyLeftUp) OnClickControl(Vector2Int.left + Vector2Int.up);
-        
-        // upright
-        if (Input.GetKey(KeyCode.E) || keyRightUp) OnClickControl(Vector2Int.right + Vector2Int.up);
-
-        // up
-        if (Input.GetKey(KeyCode.W) || keyUp) OnClickControl(Vector2Int.up);
-
-       /* if (isListenKey && lastDirection != lastKey && lastKey != Vector2Int.zero)
+        if (SystemStatic.isStartGame)
         {
-            Debug.Log("MOVE!!! : " + lastKey);
-        }*/
+            // left
+            if (Input.GetKey(KeyCode.A) || keyLeft) OnClickControl(Vector2Int.left);
+
+            // right
+            if (Input.GetKey(KeyCode.D) || keyRight) OnClickControl(Vector2Int.right);
+
+            // upleft
+            if (Input.GetKey(KeyCode.Q) || keyLeftUp) OnClickControl(Vector2Int.left + Vector2Int.up);
+
+            // upright
+            if (Input.GetKey(KeyCode.E) || keyRightUp) OnClickControl(Vector2Int.right + Vector2Int.up);
+
+            // up
+            if (Input.GetKey(KeyCode.W) || keyUp) OnClickControl(Vector2Int.up);
+        }
+
     }
 
 
