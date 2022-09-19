@@ -28,6 +28,11 @@ public class IndividualBlockControl : MonoBehaviour
 
     private void Start()
     {        
+        //StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
+    }
+
+    public void DropCran()
+    {
         StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
     }
 

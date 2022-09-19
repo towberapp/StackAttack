@@ -13,8 +13,8 @@ public class SpeedIntervalController : MonoBehaviour
     private void OnLevelUp()
     {
         //speed up
-        if (MainConfig.speedMove >= 0.25)
-            MainConfig.speedMove -= 0.01f;
+        /*if (MainConfig.speedMove >= 0.25)
+            MainConfig.speedMove -= 0.01f;*/
 
         //interval up
         if (MainConfig.intervalCube >= 1)

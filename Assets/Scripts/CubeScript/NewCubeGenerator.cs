@@ -37,7 +37,9 @@ public class NewCubeGenerator : MonoBehaviour
     private void Awake()
     {
         EventsController.StartEvent.AddListener(OnStartGame);
+        EventsController.DropCran.AddListener(DropCranEvent);
     }
+
 
     private void OnStartGame()
     {
@@ -74,6 +76,7 @@ public class NewCubeGenerator : MonoBehaviour
         }
     }
 
+
     private void GetNewBlock(int x)
     {
         int y = GridController.yPole - 1;
@@ -96,12 +99,26 @@ public class NewCubeGenerator : MonoBehaviour
             obj = GenerateSpecialObj(pos, blockInt);
         }
 
+        //obj.SetActive(false);
+        EventsController.RunCran.Invoke(obj, x);
+
+        Debug.Log("Send:"+ x);
+            
         SetCoords(arrayPos, obj);
+    }
+
+
+    private void DropCranEvent(GameObject block, int xPos)
+    {        
+        block.transform.SetParent(cubeFolder.transform);
+        block.GetComponent<IndividualBlockControl>().DropCran();
     }
 
 
     private void SetCoords(Vector2Int pos, GameObject obj)
     {
+        if (MainConfig.countCubeSet == 10000) MainConfig.countCubeSet = 10;
+
         obj.GetComponent<SpriteRenderer>().sortingOrder = MainConfig.countCubeSet + 10;
 
         MoveByGrid moveByGrid = obj.GetComponent<MoveByGrid>();

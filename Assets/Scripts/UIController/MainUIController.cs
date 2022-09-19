@@ -62,7 +62,7 @@ public class MainUIController : MonoBehaviour
         restartBtnObj.SetActive(false);
         resumeBtnObj.SetActive(false);
         startGameBtnObj.SetActive(true);
-        difficulSelectObj.SetActive(true);
+        //difficulSelectObj.SetActive(true);
 
         gameOverMenuObj.SetActive(false);
         LoadLevelRecord();
@@ -102,7 +102,7 @@ public class MainUIController : MonoBehaviour
         restartBtnObj.SetActive(true);
         startGameBtnObj.SetActive(false);
         gameOverMenuObj.SetActive(false);
-        difficulSelectObj.SetActive(false);
+        //difficulSelectObj.SetActive(false);
         SetPauseGame(true);
     }
 
@@ -118,7 +118,7 @@ public class MainUIController : MonoBehaviour
         startGameBtnObj.SetActive(false);
         resumeBtnObj.SetActive(false);
         gameOverMenuObj.SetActive(true);
-        difficulSelectObj.SetActive(false);
+        //difficulSelectObj.SetActive(false);
     }
 
 

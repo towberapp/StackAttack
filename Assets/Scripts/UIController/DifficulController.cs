@@ -36,7 +36,7 @@ public class DifficulController : MonoBehaviour
 
     private void Start()
     {
-        SelectDiff(1);
+        SelectDiff(0);
     }
 
     public void SelectDiff(int index)

@@ -18,6 +18,9 @@ public class EventsController : MonoBehaviour
     public static UnityEvent<int, int, Vector2[]> moveCubeEvent = new();
     public static UnityEvent<Vector2> CheckForBrakeEvent = new();
 
+    public static UnityEvent<GameObject, int> RunCran = new();
+    public static UnityEvent<GameObject, int> DropCran = new();
+
     // player Animation
     public static UnityEvent playerRunAnimationEvent = new();
     public static UnityEvent playerPushAnimationEvent = new();
