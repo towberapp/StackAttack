@@ -21,8 +21,7 @@ public class PerimetrBlockController : MonoBehaviour
     private void OnNextLevel()
     {
         Instantiate(wallCube, new Vector2(-1, GridController.yPole-1 + SystemStatic.level), Quaternion.identity);
-        Instantiate(wallCube, new Vector2(GridController.xPole, GridController.yPole-1 + SystemStatic.level), Quaternion.identity);
-        folderTop.transform.position = folderTop.transform.position + Vector3.up;
+        Instantiate(wallCube, new Vector2(GridController.xPole, GridController.yPole-1 + SystemStatic.level), Quaternion.identity);        
     }
 
     private void OnStartGame()
@@ -33,11 +32,11 @@ public class PerimetrBlockController : MonoBehaviour
            Instantiate(wallCube, new Vector2(GridController.xPole, i), Quaternion.identity);
         }
 
-        Instantiate(cornerCube, new Vector2(-1, GridController.yPole), Quaternion.identity, folderTop.transform);
-        Instantiate(cornerCube, new Vector2(GridController.xPole, GridController.yPole), Quaternion.identity, folderTop.transform);
+        // folderTop 
+        Instantiate(cornerCube, new Vector2(-2, GridController.yPole), Quaternion.identity, folderTop.transform);
+        Instantiate(cornerCube, new Vector2(GridController.xPole-1, GridController.yPole), Quaternion.identity, folderTop.transform);
 
-
-        for (int i = 0; i < GridController.xPole; i++)
+        for (int i = -1; i < GridController.xPole-1; i++)
         {
             Instantiate(wallCubeTop, new Vector2(i, GridController.yPole), Quaternion.identity, folderTop.transform);
         }
