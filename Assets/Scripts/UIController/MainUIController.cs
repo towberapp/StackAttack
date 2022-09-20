@@ -109,7 +109,11 @@ public class MainUIController : MonoBehaviour
     private void OnGameOver()
     {
         SystemStatic.isGameOver = true;
+        Invoke(nameof(GameOverInvoke), 1.0f);
+    }
 
+    private void GameOverInvoke()
+    {
         SetPauseGame(true);
         mainMenuObj.SetActive(true);
         leftMenuBtnObj.SetActive(false);
