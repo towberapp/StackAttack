@@ -144,8 +144,13 @@ public class MoveController : MonoBehaviour
         StartCoroutine(StartMovePlayer(direction));        
     }
 
+
+
+
+
     private IEnumerator StartMovePlayer(Vector2Int direction)
     {
+        Vector2Int startPos = new(moveByGrid.x, moveByGrid.y);
 
         if (SystemStatic.isGameOver) yield break;
         isListenKey = false;
@@ -156,8 +161,9 @@ public class MoveController : MonoBehaviour
             Vector2Int newDirection = ChangeDirection(direction);
             EventsController.playerDirectionEvent.Invoke(newDirection.x);
             Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
-
+            
             ChangePos(newDirection);
+            EventsController.PlayerMove.Invoke();
 
             yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
         }
@@ -175,6 +181,7 @@ public class MoveController : MonoBehaviour
                     EventsController.playerDirectionEvent.Invoke(nextDirection.x);
                     Vector2Int destination = moveByGrid.GetMoveDestination(nextDirection);
                     ChangePos(nextDirection);
+                    EventsController.PlayerMove.Invoke();
                     yield return StartCoroutine(moveByGrid.NewMovePlayerGrid(destination));
                 }
             }
@@ -190,57 +197,80 @@ public class MoveController : MonoBehaviour
 
         EventsController.playerIdleAnimationEvent.Invoke();
 
+        Vector2Int curPos = new(moveByGrid.x, moveByGrid.y);
 
-      /*  Debug.Log("direction:" + direction);
-        Debug.Log("next direction:" + nextDirection);
-        Debug.Log("lastkey:" + lastKey);*/
 
         // check special cube
         isListenKey = true;
         moveByGrid.isMove = false;
 
-        // move in special cube 
-        if (moveByGrid.y > 0)// && lastKey == nextDirection || moveByGrid.y>0 && nextDirection == Vector2Int.zero)
+
+        Vector2Int checkDown = CheckDownCube();
+        if (checkDown != Vector2Int.zero)
         {
-            Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
-            GameObject obj = GridController.GetBlockByPos(pos);            
-            // if down is block
-            if (obj.GetComponent<CubeGlobal>() != null)
+            if (checkDown.y == 2 && curPos != startPos)
             {
-                CubeGlobal cube = obj.GetComponent<CubeGlobal>();
-                
-                // lentaCube
-                Vector2Int moveNow = cube.moveLenta;
-                int jumpHeight = cube.jumpHeight;
-
-                //funblock 
-                if (jumpHeight > 1)
-                {
-                    StartCoroutine(StartMovePlayer(Vector2Int.up*2));
-                    lastKey = Vector2Int.up;
-                }
-
-                // if moving block
-                if (moveNow != Vector2Int.zero)
-                {
-                    if (lastKey != Vector2Int.up)
-                    {
-                        if (moveByGrid.IsPoleEmpty(moveNow))
-                            StartCoroutine(StartMovePlayer(moveNow));
-                    } else
-                    {
-                        StartCoroutine(StartMovePlayer(Vector2Int.up));
-                    }
-
-                }
+                StartCoroutine(StartMovePlayer(Vector2Int.up * 2));
+                lastKey = Vector2Int.up;
             }
+
+            // if moving block
+            if (checkDown.x != 0)
+            {
+                if (lastKey != Vector2Int.up)
+                {
+                    if (moveByGrid.IsPoleEmpty(checkDown))
+                        StartCoroutine(StartMovePlayer(checkDown));
+                }
+                else
+                {
+                    StartCoroutine(StartMovePlayer(Vector2Int.up));
+                }
+
+            }
+
         }
 
     }
 
+
+    private Vector2Int CheckDownCube()
+    {
+        if (moveByGrid.y > 0)
+        {
+            Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
+            GameObject obj = GridController.GetBlockByPos(pos);
+
+            if (obj.GetComponent<CubeGlobal>() != null)
+            {
+                CubeGlobal cube = obj.GetComponent<CubeGlobal>();
+
+                if (cube.jumpHeight > 1)
+                {
+                    return Vector2Int.up*2;
+                } 
+
+                if (cube.moveLenta != Vector2Int.zero)
+                {
+                    return cube.moveLenta;
+                }
+
+                return Vector2Int.zero;
+
+            } else
+            {
+                return Vector2Int.zero;
+            }
+
+        } else
+        {
+            return Vector2Int.zero;
+        }
+    }
+
     private void ChangePos(Vector2Int dir)
     {
-        //Debug.Log("CHANGE POS: " + dir);
+
 
         GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, dir, 2);
 
@@ -255,6 +285,8 @@ public class MoveController : MonoBehaviour
 
     private Vector2Int ChangeDirection(Vector2Int direction) 
     {
+        Vector2Int checkDown = CheckDownCube();
+
         if (direction == (Vector2Int.left + Vector2Int.up))
         {
             if (moveByGrid.IsPoleEmpty(Vector2Int.left)) return direction;
@@ -269,8 +301,18 @@ public class MoveController : MonoBehaviour
             return Vector2Int.up;
         }
 
+        if (direction == Vector2Int.left)
+        {
+            
+        }
+
         if (direction == Vector2Int.up)
         {
+            if (checkDown.y == 2)
+            {
+                return Vector2Int.up*2;
+            }        
+
             if (moveByGrid.IsPoleEmpty(Vector2Int.down))
             {
                 return Vector2Int.up;
@@ -280,7 +322,6 @@ public class MoveController : MonoBehaviour
 
         return direction;
     }
-
 
 
     private bool IsCanPlayerMove(Vector2Int direction)

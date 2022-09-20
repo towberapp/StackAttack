@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66829d26a9676ab42a074c10aedb067d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialCubePercent: 2
+  specialCubePercent: 3
   cube: {fileID: 4911630694828461723, guid: 66c90388a7b685b47a828a153543da32, type: 3}
   cubeFolder: {fileID: 876172020}
   spriteBlock:
@@ -646,6 +646,9 @@ MonoBehaviour:
   specialBlock:
   - {fileID: 5119300007743978884, guid: 30c5808aeb9b2534b81d2feba8423b40, type: 3}
   - {fileID: 7153327581894193894, guid: c40727305598c314a9ba560bde58923a, type: 3}
+  - {fileID: 8291494400555229336, guid: 5e5e4e1969e848341b51636850908849, type: 3}
+  - {fileID: 8291494400555229336, guid: 5e5e4e1969e848341b51636850908849, type: 3}
+  - {fileID: 8291494400555229336, guid: 5e5e4e1969e848341b51636850908849, type: 3}
 --- !u!114 &31950260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2620,7 +2623,8 @@ Transform:
   m_LocalPosition: {x: 3, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1170186484}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5720,7 +5724,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1458251815}
-  m_Father: {fileID: 1706583271}
+  m_Father: {fileID: 519420032}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1193573390
@@ -7762,7 +7766,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1838784271}
-  - {fileID: 1170186484}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

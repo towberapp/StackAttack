@@ -59,6 +59,12 @@ public class GridController : MonoBehaviour
         return false;
     }
 
+    public static bool CheckCubeInArray(Vector2Int pos)
+    {
+        if (mainGrid[pos.x, pos.y] == 1) return true;
+        return false;
+    }
+
 
     public static void MoveBlock(Vector2Int blockPos, Vector2Int direction)
     {

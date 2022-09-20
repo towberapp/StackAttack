@@ -13,22 +13,13 @@ public class CraneController : MonoBehaviour
     {
         EventsController.StartEvent.AddListener(OnStartGame);
         EventsController.RunCran.AddListener(NewCube);
-        EventsController.NextLevelEvent.AddListener(OnNextLevel);
     }
 
-    private void OnNextLevel()
-    {
-        
-    }
 
     private void NewCube(GameObject block, int xPos)
     {
         Vector3 pos = cranGroup.transform.position;
-        GameObject obj = Instantiate(cranPrefab, pos, Quaternion.identity, cranGroup.transform);
-        obj.transform.position = new(-2f, obj.transform.position.y, obj.transform.position.z);
-
-        block.transform.position = obj.transform.position - new Vector3(0,0.75f,0);
-        block.transform.SetParent(obj.transform);
+        GameObject obj = Instantiate(cranPrefab, pos, Quaternion.identity, cranGroup.transform);        
 
         StartCoroutine(MoveObject(new Vector2Int(GridController.xPole + 4, 0), obj, xPos, block));
     }
@@ -36,34 +27,52 @@ public class CraneController : MonoBehaviour
     private void OnStartGame()
     {
         Vector3 pos = cranGroup.transform.position;
-        cranGroup.transform.position = pos + new Vector3(0, GridController.yPole-0.33f, pos.z);
+        cranGroup.transform.position = pos + new Vector3(0, GridController.yPole-0.33f-1, 10);
     }
 
 
     public IEnumerator MoveObject(Vector2 vector, GameObject obj, int stopPos, GameObject block)
     {
+        //int rnd = stopPos > GridController.xPole / 2 ? -1 : 1;
+
+        int rnd =  UnityEngine.Random.Range(0, 2) * 2 - 1;
+
+        float startpos = rnd > 0 ? -2f : GridController.xPole + 2f;        
+
+        obj.transform.position = new(startpos, obj.transform.position.y, obj.transform.position.z);
+
+
+        block.transform.SetParent(obj.transform);
+        block.transform.localPosition = new Vector3(0, -0.72f, 0);
+
         bool drop = false;
         float elapseTime = 0;
         float realSpeed = MainConfig.speedMove * vector.x / 2;
 
-        Vector2 originPos = obj.transform.position;
-        Vector2 targetPos = originPos + vector;               
+        Vector2 originPos = obj.transform.localPosition;
+        Vector2 targetPos = originPos + vector * rnd;   
+       
 
         while (elapseTime < realSpeed && !SystemStatic.isGameOver)
         {
-            if (obj.transform.position.x >= stopPos && !drop)
+            bool right = obj.transform.position.x <= stopPos;
+            bool left = obj.transform.position.x >= stopPos;
+            bool check = rnd > 0 ? left : right;
+            
+            if (check && !drop)
             {
                 drop = true;
-                Debug.Log("DROP OBJ");
-                EventsController.DropCran.Invoke(block, stopPos);
+                EventsController.DropCran.Invoke(block, stopPos); 
+                obj.GetComponent<CranLocalScript>().SetTrigger();
+                yield return new WaitForSeconds(0.5f);                     
             }
 
-            obj.transform.position = Vector3.Lerp(originPos, targetPos, (elapseTime / realSpeed));
+            obj.transform.localPosition = Vector3.Lerp(originPos, targetPos, (elapseTime / realSpeed));
+
             elapseTime += Time.deltaTime;
             yield return null;
         }
+        Destroy(obj);
+    }    
 
-        if (!SystemStatic.isGameOver)
-            obj.transform.position = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
-    }
 }

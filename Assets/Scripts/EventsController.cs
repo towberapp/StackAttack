@@ -15,6 +15,8 @@ public class EventsController : MonoBehaviour
     public static UnityEvent NextLevelEvent = new();
     public static UnityEvent UpgradeGridEvent = new();
 
+    public static UnityEvent PlayerMove = new();
+
     public static UnityEvent<int, int, Vector2[]> moveCubeEvent = new();
     public static UnityEvent<Vector2> CheckForBrakeEvent = new();
 
@@ -43,7 +45,7 @@ public class EventsController : MonoBehaviour
         playerPushAnimationEvent.RemoveAllListeners();
         playerIdleAnimationEvent.RemoveAllListeners();
         playerDirectionEvent.RemoveAllListeners();
-
+        PlayerMove.RemoveAllListeners();
 
     }
 }

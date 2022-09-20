@@ -10,6 +10,8 @@ public class IndividualBlockControl : MonoBehaviour
     MoveByGrid moveByGrid;
     private IEnumerator coroutine;
     private bool isMoving = true;
+    private bool isStart = false;
+    private bool isOnMoveBlock = false;
     SpriteRenderer rend;
 
     private void Awake()
@@ -18,6 +20,18 @@ public class IndividualBlockControl : MonoBehaviour
         EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
         rend = GetComponent<SpriteRenderer>();
+        EventsController.PlayerMove.AddListener(PlayerMove);
+
+
+    }
+
+    private void PlayerMove()
+    {
+        if (!isStart || isMoving) return; 
+        if (!isOnMoveBlock) return;
+
+        StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
+        Debug.Log("UPDATE CUBE");
     }
 
     private void OnLevelUp()
@@ -31,9 +45,11 @@ public class IndividualBlockControl : MonoBehaviour
         //StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
     }
 
+
     public void DropCran()
     {
         StartCoroutine(StartMoveBlock(Vector2Int.zero, 1));
+        isStart = true;
     }
 
 
@@ -61,8 +77,7 @@ public class IndividualBlockControl : MonoBehaviour
         bool isEmptyUp = moveByGrid.IsPoleEmpty(Vector2Int.up);        
 
         if (isEmpty && isEmptyUp)
-        {
-            Debug.Log("CHECK AUTO: " + auto);
+        {            
             if (auto)
                 EventsController.playerPushAnimationEvent.Invoke();
                         
@@ -105,6 +120,10 @@ public class IndividualBlockControl : MonoBehaviour
         isMoving = false;
         CheckUnderGround();
 
+        if (GetComponent<SpecialTNTControl>() != null)
+        {
+            GetComponent<SpecialTNTControl>().StartAnim();
+        }
 
         if (moveByGrid.y > 0)
         {
@@ -117,9 +136,19 @@ public class IndividualBlockControl : MonoBehaviour
                 Vector2Int moveNow = obj.GetComponent<CubeGlobal>().moveLenta;
                 if (moveNow != Vector2Int.zero)
                 {
+                    isOnMoveBlock = true;
                     MoveBlock(moveNow, false);
+                } else
+                {
+                    isOnMoveBlock = false;
                 }
+            } else
+            {
+                isOnMoveBlock = false;
             }
+        } else
+        {
+            isOnMoveBlock = false;
         }
 
     }

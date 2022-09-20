@@ -102,7 +102,7 @@ public class NewCubeGenerator : MonoBehaviour
         //obj.SetActive(false);
         EventsController.RunCran.Invoke(obj, x);
 
-        Debug.Log("Send:"+ x);
+        //Debug.Log("Send:"+ x);
             
         SetCoords(arrayPos, obj);
     }
