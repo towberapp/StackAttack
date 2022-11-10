@@ -132,6 +132,7 @@ public class NewCubeGenerator : MonoBehaviour
     private GameObject GenerateSpecialObj(Vector2Int pos, int blockInt)
     {             
         GameObject obj = Instantiate(specialBlock[blockInt], ((Vector3Int)pos), Quaternion.identity, cubeFolder.transform);
+
         return obj;
     }
 
