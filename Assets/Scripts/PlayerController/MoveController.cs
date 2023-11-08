@@ -48,8 +48,12 @@ public class MoveController : MonoBehaviour
 
     private void Start()
     {
+        //Debug.Log("Start 1: " + playerPos);
+
         transform.position = (Vector2)playerPos;
         isListenKey = true;
+
+        //Debug.Log("Start 2: " + playerPos);
     }
 
 
@@ -132,6 +136,11 @@ public class MoveController : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || keyUp) OnClickControl(Vector2Int.up);
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        MainConfig.playerFloatX = transform.position;
     }
 
 
@@ -235,11 +244,18 @@ public class MoveController : MonoBehaviour
 
 
     private Vector2Int CheckDownCube()
-    {
+    {        
         if (moveByGrid.y > 0)
         {
             Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
             GameObject obj = GridController.GetBlockByPos(pos);
+
+            // если под ногами динамит - включить его
+            if (obj.GetComponent<SpecialTNTControl>() != null)
+            {
+                obj.GetComponent<SpecialTNTControl>().StartAnim();
+            }
+
 
             if (obj.GetComponent<CubeGlobal>() != null)
             {

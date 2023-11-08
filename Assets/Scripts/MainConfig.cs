@@ -10,6 +10,8 @@ public class MainConfig : MonoBehaviour
     public static int playerX;
     public static int playerY;
 
+    public static Vector2 playerFloatX;
+
     public static int countCubeSet;
 
     private void Awake()

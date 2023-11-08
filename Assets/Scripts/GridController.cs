@@ -6,6 +6,8 @@ public class GridController : MonoBehaviour
     //[SerializeField] private int xPoleConfig = 7;
     //[SerializeField] private int yPoleConfig = 6;
 
+    [SerializeField] private  int yPoleSetup = 9;
+
     public static int[,] mainGrid;
     public static GameObject[,] blockGrid;
 
@@ -14,17 +16,20 @@ public class GridController : MonoBehaviour
 
     private void Awake()
     {
+        yPole = yPoleSetup;
         EventsController.PreStartEvent.AddListener(OnPreStartGame);
     }
 
     private void OnPreStartGame(int row)
     {
         xPole = row;
-        yPole = Convert.ToInt16(xPole * 0.9f);
+        //yPole = Convert.ToInt16(xPole * 0.9f);
+        //yPole = 9;
+
         mainGrid = new int[xPole, yPole];
         blockGrid = new GameObject[xPole, yPole];
 
-        //Debug.Log("START");
+        Debug.Log("START");
 
         EventsController.StartEvent.Invoke();
         SystemStatic.isStartGame = true;

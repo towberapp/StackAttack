@@ -29,6 +29,9 @@ public class EventsController : MonoBehaviour
     public static UnityEvent playerIdleAnimationEvent = new();
     public static UnityEvent<int> playerDirectionEvent = new();
 
+    public static UnityEvent onTakeChip = new();
+
+    //
 
 
     private void OnDestroy()
