@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class IndividualBlockControl : MonoBehaviour
 {
@@ -14,6 +12,8 @@ public class IndividualBlockControl : MonoBehaviour
     private bool isOnMoveBlock = false;
     SpriteRenderer rend;
 
+    [HideInInspector] public UnityEvent touchGround;
+
     private void Awake()
     {
         moveByGrid = GetComponent<MoveByGrid>();
@@ -21,8 +21,6 @@ public class IndividualBlockControl : MonoBehaviour
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
         rend = GetComponent<SpriteRenderer>();
         EventsController.PlayerMove.AddListener(PlayerMove);
-
-
     }
 
     private void PlayerMove()
@@ -74,9 +72,13 @@ public class IndividualBlockControl : MonoBehaviour
     public void MoveBlock(Vector2Int direction, bool auto = true)
     {
         bool isEmpty = moveByGrid.IsPoleEmpty(direction);
-        bool isEmptyUp = moveByGrid.IsPoleEmpty(Vector2Int.up);        
+        bool isEmptyUp = moveByGrid.IsPoleEmpty(Vector2Int.up);
+        bool isCanMoove = true;
 
-        if (isEmpty && isEmptyUp)
+        if (GetComponent<NoMooveCube>() != null)
+            isCanMoove = false;
+
+        if (isEmpty && isEmptyUp && isCanMoove)
         {            
             if (auto)
                 EventsController.playerPushAnimationEvent.Invoke();
@@ -90,7 +92,7 @@ public class IndividualBlockControl : MonoBehaviour
     {
         //Debug.Log("fn: " + fn + ", START MOVE! :" + moveByGrid.id );
 
-        if (SystemStatic.isGameOver) yield break;
+        if (SystemStatic.isGameOver) yield break;       
 
         isMoving = true;
 
@@ -114,17 +116,18 @@ public class IndividualBlockControl : MonoBehaviour
                 moveByGrid.y -= 1;                
                 coroutine = moveByGrid.NewMovePlayerGrid(destination);
 
+                rend.sortingOrder = moveByGrid.y;
+
                 yield return StartCoroutine(coroutine);
             }
         
         isMoving = false;
+
+        touchGround.Invoke();
+
         CheckUnderGround();
 
-        if (GetComponent<SpecialTNTControl>() != null)
-        {
-            GetComponent<SpecialTNTControl>().StartAnim();
-        }
-
+        // если блок встречает ленту-блок
         if (moveByGrid.y > 0)
         {
             Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
@@ -160,6 +163,8 @@ public class IndividualBlockControl : MonoBehaviour
             Color tmp = rend.color;
             tmp.a = 0.5f;
             rend.color = tmp;
+
+            rend.sortingOrder = -1;
             
             Destroy(moveByGrid);
             Destroy(this);

@@ -13,6 +13,7 @@ public class CoinController : MonoBehaviour
     private void Awake()
     {
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
+        EventsController.onTakeChip.AddListener(OnTakeChip);
         SystemStatic.coin = playerpref.GetCoin();
     }
     private void Start()
@@ -21,10 +22,20 @@ public class CoinController : MonoBehaviour
     }
 
     private void OnLevelUp()
-    {        
-        SystemStatic.coin += 5;
+    {
+        UpdateCoin(1);
+    }
+
+    private void OnTakeChip()
+    {
+        UpdateCoin(5);
+    }
+
+    private void UpdateCoin (int coin)
+    {
+        SystemStatic.coin += coin;
         playerpref.UpdateCoin();
-        StartCoroutine(CointVisual(5));
+        StartCoroutine(CointVisual(coin));
     }
 
 
@@ -38,5 +49,11 @@ public class CoinController : MonoBehaviour
         coinTextTopMenu.text = SystemStatic.coin.ToString();
     }
 
+
+    private void OnDestroy()
+    {
+        EventsController.NextLevelEvent.RemoveListener(OnLevelUp);
+        EventsController.onTakeChip.RemoveListener(OnTakeChip);
+    }
 
 }

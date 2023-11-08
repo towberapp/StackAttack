@@ -10,6 +10,7 @@ public class PerimetrBlockController : MonoBehaviour
     [SerializeField] private GameObject cornerCube;
 
     [SerializeField] private GameObject folderTop;
+    [SerializeField] private GameObject folderFix;
 
 
     private void Awake()
@@ -20,16 +21,17 @@ public class PerimetrBlockController : MonoBehaviour
 
     private void OnNextLevel()
     {
-        Instantiate(wallCube, new Vector2(-1, GridController.yPole-1 + SystemStatic.level), Quaternion.identity);
-        Instantiate(wallCube, new Vector2(GridController.xPole, GridController.yPole-1 + SystemStatic.level), Quaternion.identity);        
+        Instantiate(wallCube, new Vector2(-1, GridController.yPole-1 + SystemStatic.level), Quaternion.identity, folderFix.transform);
+        Instantiate(wallCube, new Vector2(GridController.xPole, GridController.yPole-1 + SystemStatic.level), Quaternion.identity, folderFix.transform);        
     }
 
     private void OnStartGame()
     {
+
         for (int i = 0; i < GridController.yPole; i++)
         {
-           Instantiate(wallCube, new Vector2(-1, i), Quaternion.identity);
-           Instantiate(wallCube, new Vector2(GridController.xPole, i), Quaternion.identity);
+           Instantiate(wallCube, new Vector2(-1, i), Quaternion.identity, folderFix.transform);
+           Instantiate(wallCube, new Vector2(GridController.xPole, i), Quaternion.identity, folderFix.transform);
         }
 
         // folderTop 

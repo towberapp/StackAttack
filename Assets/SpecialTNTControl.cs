@@ -24,13 +24,18 @@ public class SpecialTNTControl : MonoBehaviour
 
     IEnumerator fxStart()
     {
-        yield return new WaitForSeconds(3.5f);        
-        GameObject obj = Instantiate(fx, transform.position, Quaternion.identity, transform.parent);
-        SpriteRenderer render = GetComponent<SpriteRenderer>();
-        render.enabled = false;
-        BoomCobe();
-        yield return new WaitForSeconds(2f);
-        Destroy(obj);
+        yield return new WaitForSeconds(7f);
+
+        if (moveByGrid.y >= 0)
+        {
+
+            GameObject obj = Instantiate(fx, transform.position, Quaternion.identity, transform.parent);
+            SpriteRenderer render = GetComponent<SpriteRenderer>();
+            render.enabled = false;
+            BoomCobe();
+            yield return new WaitForSeconds(2f);
+            Destroy(obj);
+        }
     }
 
     private void BoomCobe()
@@ -42,11 +47,22 @@ public class SpecialTNTControl : MonoBehaviour
         Vector2Int leftUp = myPos + Vector2Int.left + Vector2Int.up;
         Vector2Int rightUp = myPos + Vector2Int.right + Vector2Int.up;
 
+        Vector2Int leftDown = myPos - Vector2Int.left + Vector2Int.up;
+        Vector2Int rightDown = myPos - Vector2Int.right + Vector2Int.up;
+        Vector2Int down = myPos - Vector2Int.up;
+
         DeleteCube(left);
         DeleteCube(right);
         DeleteCube(up);
         DeleteCube(leftUp);
         DeleteCube(rightUp);
+
+        if (down.y >= 0) 
+        { 
+            DeleteCube(down);
+            DeleteCube(leftDown);
+            DeleteCube(rightDown);
+        }
 
         DeleteCube(myPos);
 

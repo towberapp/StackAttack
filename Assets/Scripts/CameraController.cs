@@ -20,9 +20,9 @@ public class CameraController : MonoBehaviour
         float sdvig = (row / 2.0f) - 0.5f;
         cam.orthographicSize = (row / scaleheight)* 1.085f;
 
-        Debug.Log("row: " + row);
-        Debug.Log("scaleheight" + scaleheight);
-        Debug.Log("scaleheight 2: " + cam.orthographicSize);
+        //Debug.Log("row: " + row);
+        //Debug.Log("scaleheight" + scaleheight);
+        //Debug.Log("scaleheight 2: " + cam.orthographicSize);
 
         // scale: 0,88888, row 9. cam: 10,12 - norm 11   \\ 1.088
         // scale: 1, row 9, cam 9 - norm 9.75
@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         scaleheight = windowaspect / targetaspect;
         cam.orthographicSize /= scaleheight;
 
-        Debug.Log("scaleheight: " + scaleheight);
+        //Debug.Log("scaleheight: " + scaleheight);
 
         //transform.position = new Vector3(transform.position.x, transform.position.y / scaleheight, transform.position.z);
     }

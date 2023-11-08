@@ -102,7 +102,7 @@ public class NewCubeGenerator : MonoBehaviour
         //obj.SetActive(false);
         EventsController.RunCran.Invoke(obj, x);
 
-        //Debug.Log("Send:"+ x);
+        //Debug.Log("SetCoords:" + arrayPos);
             
         SetCoords(arrayPos, obj);
     }
@@ -117,9 +117,8 @@ public class NewCubeGenerator : MonoBehaviour
 
     private void SetCoords(Vector2Int pos, GameObject obj)
     {
-        if (MainConfig.countCubeSet == 10000) MainConfig.countCubeSet = 10;
-
-        obj.GetComponent<SpriteRenderer>().sortingOrder = MainConfig.countCubeSet + 10;
+        //if (MainConfig.countCubeSet == 10000) MainConfig.countCubeSet = 10;
+        //obj.GetComponent<SpriteRenderer>().sortingOrder = MainConfig.countCubeSet + 10;
 
         MoveByGrid moveByGrid = obj.GetComponent<MoveByGrid>();
         moveByGrid.x = pos.x;
@@ -129,9 +128,11 @@ public class NewCubeGenerator : MonoBehaviour
         GridController.mainGrid[pos.x, pos.y] = 1;
     }
 
+
     private GameObject GenerateSpecialObj(Vector2Int pos, int blockInt)
     {             
         GameObject obj = Instantiate(specialBlock[blockInt], ((Vector3Int)pos), Quaternion.identity, cubeFolder.transform);
+
         return obj;
     }
 

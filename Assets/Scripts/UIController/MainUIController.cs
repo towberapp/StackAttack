@@ -45,7 +45,7 @@ public class MainUIController : MonoBehaviour
         exitGameBtn.onClick.AddListener(OnExitClick);
         reStartGameBtn.onClick.AddListener(RestartGame);
 
-        Debug.Log("AWAKE GAME");
+        //Debug.Log("AWAKE GAME");
 
         SystemStatic.isStartGame = false;
         SystemStatic.isGameOver = false;
