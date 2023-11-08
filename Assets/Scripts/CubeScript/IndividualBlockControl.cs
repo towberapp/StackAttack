@@ -53,6 +53,8 @@ public class IndividualBlockControl : MonoBehaviour
 
     public void DestroyCube()
     {
+        if (moveByGrid.y < 0) return;
+
         GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
         Destroy(gameObject);
     }

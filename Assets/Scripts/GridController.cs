@@ -144,7 +144,7 @@ public class GridController : MonoBehaviour
         int count = 0;
         for (int x = 0; x < xPole; x++)
         {
-            if (mainGrid[x, 0] == 1)
+            if (mainGrid[x, 0] == 1 && blockGrid[x,0].CompareTag("Cube"))
             {
                 count++;
             }

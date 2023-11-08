@@ -21,14 +21,14 @@ public class PlayerPrefsController
 
     public void UpdateCoin()
     {
-        Debug.Log("UPDATE COOIN: " + coin);
+        //Debug.Log("UPDATE COOIN: " + coin);
         PlayerPrefs.SetInt(coin, SystemStatic.coin);
     }
 
     public void UpdateRecordLevel ()
     {
-        Debug.Log("SystemStatic.level: " + SystemStatic.level);
-        Debug.Log("SystemStatic.levelRecord: " + SystemStatic.levelRecord);
+        //Debug.Log("SystemStatic.level: " + SystemStatic.level);
+        //Debug.Log("SystemStatic.levelRecord: " + SystemStatic.levelRecord);
 
         if (SystemStatic.level > SystemStatic.levelRecord)
             PlayerPrefs.SetInt(levelRecord, SystemStatic.level);

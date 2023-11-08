@@ -20,11 +20,11 @@ public class CointBlockController : MonoBehaviour
 
     private void OnTouchGround()
     {
-        Debug.Log("ON TOUCH GROUND");
+        //Debug.Log("ON TOUCH GROUND");
 
         animator.SetTrigger("Break");
         Instantiate(coinGroup, transform.position, transform.rotation);
-        Invoke("DestroyCube", 2f);
+        Invoke("DestroyCube", 0.5f);
 
     }
 

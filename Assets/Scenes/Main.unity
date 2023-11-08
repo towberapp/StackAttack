@@ -9333,6 +9333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b590b5292bdf47ab33598f3256f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedCloud: 2.65
+  cloudFrequinsy: 2.73
   cloudBase: {fileID: 7852920395396758369, guid: b19d8c24b74ec9e46abe64e350fe2205, type: 3}
   sprite:
   - {fileID: 21300000, guid: f76791999a564484aa2ce9949f838482, type: 3}

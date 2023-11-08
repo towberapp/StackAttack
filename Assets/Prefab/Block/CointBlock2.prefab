@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 197507410143251669}
   - component: {fileID: 197507410143251499}
   - component: {fileID: 197507410143251667}
+  - component: {fileID: 3799358756113428157}
   m_Layer: 0
   m_Name: CointBlock2
   m_TagString: CubeCoin
@@ -280,3 +281,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinGroup: {fileID: 4636218776612842573, guid: 8977369c5642cf84fac49aa5f4b5a82f, type: 3}
+--- !u!114 &3799358756113428157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197507410143251498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612affe53a276a843a38190b245e11f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -250,6 +250,8 @@ public class MoveController : MonoBehaviour
             Vector2Int pos = new(moveByGrid.x, moveByGrid.y - 1);
             GameObject obj = GridController.GetBlockByPos(pos);
 
+            if (obj == null) return Vector2Int.down;
+
             // если под ногами динамит - включить его
             if (obj.GetComponent<SpecialTNTControl>() != null)
             {
