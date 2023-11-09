@@ -77,13 +77,12 @@ public class GridController : MonoBehaviour
 
         if (!IsOutOfRange(blockPos) && !IsInArray(blockPos) && !IsInArray(blockTop))
         {
-            EventsController.playerRunAnimationEvent.Invoke();
+            //Debug.Log("MOVE--- NO---- BLOCK");
+            EventsController.blockMoove.Invoke(false);
         }
       
         if (!IsOutOfRange(blockPos) && IsInArray(blockPos))
         {
-           // Debug.Log("MOVE BLOCK: " + blockPos);
-
             //print("MOVE BLOCK IN ARRAR: " + blockPos);
             GameObject block = blockGrid[blockPos.x, blockPos.y];
             IndividualBlockControl 
@@ -144,7 +143,8 @@ public class GridController : MonoBehaviour
         int count = 0;
         for (int x = 0; x < xPole; x++)
         {
-            if (mainGrid[x, 0] == 1 && blockGrid[x,0].CompareTag("Cube"))
+
+            if (mainGrid[x, 0] == 1 && blockGrid[x, 0] != null && blockGrid[x,0].CompareTag("Cube"))
             {
                 count++;
             }

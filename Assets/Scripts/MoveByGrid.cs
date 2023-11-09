@@ -15,9 +15,7 @@ public class MoveByGrid : MonoBehaviour
     }
 
     public IEnumerator NewMovePlayerGrid(Vector2Int destination)
-    {
-        //  Debug.Log(" NewMovePlayerGrid: " + destination);
-
+    {     
         float elapseTime = 0;        
         Vector2 originPos = transform.position; 
         Vector2 targetPos = destination;

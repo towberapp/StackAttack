@@ -28,6 +28,13 @@ public class EventsController : MonoBehaviour
     public static UnityEvent playerPushAnimationEvent = new();
     public static UnityEvent playerIdleAnimationEvent = new();
     public static UnityEvent<int> playerDirectionEvent = new();
+    public static UnityEvent<int> playerJumpAnimationEvent = new();
+    public static UnityEvent playerDestroyAnimationEvent = new();
+    public static UnityEvent playerBoomAnimationEvent = new();
+    public static UnityEvent playerOffAnimationEvent = new();
+
+    public static UnityEvent playerStopMoove = new();
+    public static UnityEvent<bool> blockMoove = new();
 
     public static UnityEvent onTakeChip = new();
 
@@ -47,6 +54,10 @@ public class EventsController : MonoBehaviour
         playerRunAnimationEvent.RemoveAllListeners();
         playerPushAnimationEvent.RemoveAllListeners();
         playerIdleAnimationEvent.RemoveAllListeners();
+        playerOffAnimationEvent.RemoveAllListeners();
+        playerDestroyAnimationEvent.RemoveAllListeners();
+        playerJumpAnimationEvent.RemoveAllListeners();
+
         playerDirectionEvent.RemoveAllListeners();
         PlayerMove.RemoveAllListeners();
 

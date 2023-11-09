@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6978c280d8868364ca81aaf761777e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puff: {fileID: 7794476646954675503, guid: eea0a2eabb1af494aaf8bfdc1c362c99, type: 3}
 --- !u!114 &9151643927945798149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 9151643928281157212}
   playerSprite: {fileID: 9151643928281157213}
+  currentStatus: 0
 --- !u!61 &7678990962621140744
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -107,7 +109,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.65}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -118,7 +120,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.15, y: 0.35}
   m_EdgeRadius: 0
 --- !u!50 &8002651022680241765
 Rigidbody2D:
@@ -241,7 +243,7 @@ SpriteRenderer:
   m_SortingLayerID: 1234756709
   m_SortingLayer: 2
   m_SortingOrder: 10
-  m_Sprite: {fileID: 726263472, guid: 71daf8526de0aa94692f7329106740c9, type: 3}
+  m_Sprite: {fileID: 279855065, guid: f246702a7d017234c90a6d8480e7e270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialCubePercent: 5
-  cube: {fileID: 4911630694828461723, guid: 66c90388a7b685b47a828a153543da32, type: 3}
+  cube: {fileID: 6876235533447584992, guid: 0ee8ee71498f5df4a80ece03585a9f24, type: 3}
   cubeFolder: {fileID: 876172020}
   spriteBlock:
   - {fileID: 21300000, guid: 0eaf18f53495a3a47b230ee51c05f6b7, type: 3}
@@ -644,8 +644,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c96efa9128aa97b4583d2c4f63e43422, type: 3}
   - {fileID: 21300000, guid: 3a8f1de3fc06c89458503f61a6cfc785, type: 3}
   specialBlock:
-  - {fileID: 8693479690694875127, guid: b1f78737c641a9740b78beea18abdaf5, type: 3}
-  - {fileID: 197507410143251498, guid: 0b72ad1e1db9eff4895d87b981bb6a5f, type: 3}
+  - {fileID: 6820030936709126657, guid: ed8aecbda6b6d7541b43b59eef7ddd5a, type: 3}
 --- !u!114 &31950260
 MonoBehaviour:
   m_ObjectHideFlags: 0

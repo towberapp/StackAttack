@@ -24,7 +24,7 @@ public class CointBlockController : MonoBehaviour
 
         animator.SetTrigger("Break");
         Instantiate(coinGroup, transform.position, transform.rotation);
-        Invoke("DestroyCube", 0.5f);
+        Invoke("DestroyCube", 0.6f);
 
     }
 
