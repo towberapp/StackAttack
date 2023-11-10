@@ -127,6 +127,7 @@ public class IndividualBlockControl : MonoBehaviour
         isMoving = false;
 
         touchGround.Invoke();
+        EventsController.boxDownFloor.Invoke();
 
         CheckUnderGround();
 

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class AnimationController : MonoBehaviour
 {
-
+    [SerializeField] private float offWait = 5f;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer playerSprite;
 
@@ -22,6 +22,8 @@ public class AnimationController : MonoBehaviour
 
     public Status currentStatus = Status.Idle;
 
+    private IEnumerator courutoneWhaitOff;
+
     private void Awake()
     {
         EventsController.playerRunAnimationEvent.AddListener(OnRun);
@@ -35,13 +37,13 @@ public class AnimationController : MonoBehaviour
 
         EventsController.playerStopMoove.AddListener(OnStopMoove);
         EventsController.blockMoove.AddListener(OnBlockMoove);
-
     }
 
     private void OnDestroyPers()
     {
         //Debug.Log("ANIM -> DAMAGE BOX");
         anim.SetTrigger("DamgeBox");
+        StopCoroutine(courutoneWhaitOff);
     }
 
     private void OnBlockMoove(bool arg0)
@@ -49,7 +51,9 @@ public class AnimationController : MonoBehaviour
         //Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
 
         anim.SetBool("BlockMoove", arg0);
-        anim.SetBool("Run", !arg0);
+        
+        if (arg0)
+            anim.SetBool("Run", false);
     }
 
     private void OnStopMoove()
@@ -60,7 +64,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnOff()
     {
-        throw new NotImplementedException();
+        anim.SetBool("Off", true);
     }
 
     private void OnChangeDirection(int arg0)
@@ -68,7 +72,13 @@ public class AnimationController : MonoBehaviour
         FlipPlayer(arg0);
     }
 
+    private IEnumerator WaitForIdle()
+    {
+        yield return new WaitForSeconds(offWait);
+        OnOff();
+    }
 
+    
 
     private void OnIdle()
     {
@@ -80,7 +90,10 @@ public class AnimationController : MonoBehaviour
         anim.SetBool("BlockMoove", false);
         anim.SetBool("Run", false);
 
-        currentStatus = Status.Idle;        
+        currentStatus = Status.Idle;
+
+        courutoneWhaitOff = WaitForIdle();
+        StartCoroutine(courutoneWhaitOff);
     }
 
     private void OnRun()
@@ -90,11 +103,16 @@ public class AnimationController : MonoBehaviour
         if (currentStatus == Status.Run) return;
         if (currentStatus == Status.Jump) return;
 
+        anim.SetBool("Off", false);
         anim.SetBool("Idle", false);
         anim.SetBool("Run", true);
 
+
         //anim.SetTrigger("run");
         currentStatus = Status.Run;
+
+        if (courutoneWhaitOff != null)
+            StopCoroutine(courutoneWhaitOff);
     }
 
 
@@ -115,13 +133,17 @@ public class AnimationController : MonoBehaviour
 
     private void OnJump(int direct)
     {
-        //Debug.Log("ANIM -> JUMP");
+        Debug.Log("ANIM -> JUMP");
 
 
         if (currentStatus == Status.Jump) return;
-        
+
+        anim.SetBool("Off", false);
         anim.SetBool("Idle", false);
         anim.SetBool("Run", false);
+
+        if (courutoneWhaitOff != null)
+            StopCoroutine(courutoneWhaitOff);
 
         if (direct != 0)
         {                        

@@ -36,7 +36,7 @@ public class CloudManagerEffect : MonoBehaviour
         while (true)
         {
             GameObject cloud = Instantiate(cloudBase);
-            cloud.transform.position = new Vector3(-5f, SystemStatic.level + 5f + Random.Range(0f, 5f), 0);
+            cloud.transform.position = new Vector3(-5f, SystemStatic.level + 7f + Random.Range(0f, 5f), 0);
 
             Cloud component = cloud.GetComponent<Cloud>();
             component.moveSpeed = Random.Range(0.1f, 0.2f) * speedCloud;

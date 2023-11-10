@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 856397465f6f54841846a887df64663b
+guid: a7e7f69219922ac49bee0ef4b49d15ce
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Off1.3_0
+      name: Crane1.5_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47a13aa9c6b2a32428ee7480f5a74353
-      internalID: 1294518333
+      spriteID: 98e86325a72ac1e47aa84c3eee595d5d
+      internalID: 1213556602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_1
+      name: Crane1.5_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 138
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +165,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59bb6f44be039a24c86c43ea4aa68026
-      internalID: 923349378
+      spriteID: 6c163f51c2714124cae7a1c1702386be
+      internalID: 1390091545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_2
+      name: Crane1.5_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 276
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5157c3b74461f34498561f358a27b70d
-      internalID: -551846832
+      spriteID: abb3a134a64334e4c8493ed6fdb42a0a
+      internalID: 1623563515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_3
+      name: Crane1.5_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 414
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e238431c05705ca4ab16bed25a2eb920
-      internalID: -15249471
+      spriteID: 5e40ae89b3dd952438ecf1aacb4ec232
+      internalID: -1036059487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_4
+      name: Crane1.5_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 552
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,20 +228,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d695c9c01f782ac44aa909470ea876ae
-      internalID: 948480748
+      spriteID: 865b2d6c564e71d4884293b2914e881d
+      internalID: 431406036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_5
+      name: Crane1.5_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 690
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,20 +249,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45cfc60878e3a564093c73acb4256289
-      internalID: 532949568
+      spriteID: 626272819b25013408f7336a2b71ffd2
+      internalID: -1198368931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_6
+      name: Crane1.5_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 828
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,20 +270,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9898415503af03c41a4bbc49b234c293
-      internalID: -904432373
+      spriteID: b24a907cdd256a949b4a2cecfe2f876d
+      internalID: 186597560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_7
+      name: Crane1.5_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 966
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,20 +291,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86dca190cad38154596a2bf24f66d420
-      internalID: 1257006457
+      spriteID: ae0646ff3678fb44b93a4b18f48421a1
+      internalID: -1563845935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_8
+      name: Crane1.5_8
       rect:
         serializedVersion: 2
-        x: 512
+        x: 1104
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,20 +312,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f88b0819af21ad4ebb2034f44d8b93d
-      internalID: -1057213058
+      spriteID: 12be35dd539b7ad4991f5fc0fcf53cc9
+      internalID: -823610014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_9
+      name: Crane1.5_9
       rect:
         serializedVersion: 2
-        x: 576
+        x: 1242
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,20 +333,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5e29cb9b69683d4daa5ad295854d0e3
-      internalID: -256600844
+      spriteID: b36c02213dd57744c9b7e3d16ddb179e
+      internalID: 165166966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_10
+      name: Crane1.5_10
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1380
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -354,20 +354,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f61bbe156af57e44e8198875db04d8a5
-      internalID: 1840003774
+      spriteID: 39792baadc5082142a08637fa82eb25c
+      internalID: -484464998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_11
+      name: Crane1.5_11
       rect:
         serializedVersion: 2
-        x: 704
+        x: 1518
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,20 +375,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81096792474d4f24f92268fba73288ec
-      internalID: -1937947491
+      spriteID: cb31ccdd4094e554eab3a95256e634bd
+      internalID: -1218930453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_12
+      name: Crane1.5_12
       rect:
         serializedVersion: 2
-        x: 768
+        x: 1656
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,20 +396,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1007ccff8c83234db99dde0911bf7e6
-      internalID: -1341279920
+      spriteID: 05f760150564eb144a0b812d932916d1
+      internalID: 983604141
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_13
+      name: Crane1.5_13
       rect:
         serializedVersion: 2
-        x: 832
+        x: 1794
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -417,20 +417,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0a2a9498a6ae01409ca0e3c6c49942f
-      internalID: 253482677
+      spriteID: b75637e5e11f0d743869b0d43704c082
+      internalID: -2946011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_14
+      name: Crane1.5_14
       rect:
         serializedVersion: 2
-        x: 896
+        x: 1932
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,20 +438,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81297edc8f511f14287d940ffa504d36
-      internalID: 430614517
+      spriteID: 03b5bfeb2d5959e41bdad445e0029408
+      internalID: -1011148415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_15
+      name: Crane1.5_15
       rect:
         serializedVersion: 2
-        x: 960
+        x: 2070
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -459,50 +459,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 651e6c3592a4ff94492a374a725fb1d9
-      internalID: -1630646476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Off1.3_16
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 64
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3721f94a69be984b90da417d6084ac7
-      internalID: 1783177590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Off1.3_17
-      rect:
-        serializedVersion: 2
-        x: 1088
-        y: 0
-        width: 64
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7575187928fc2842ae199313c3706a6
-      internalID: 1989482921
+      spriteID: 30e3fcc6950a2a142b3cf3a254741b89
+      internalID: 1291742465
       vertices: []
       indices: 
       edges: []
@@ -518,24 +476,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Off1.3_0: 1294518333
-      Off1.3_12: -1341279920
-      Off1.3_13: 253482677
-      Off1.3_1: 923349378
-      Off1.3_4: 948480748
-      Off1.3_7: 1257006457
-      Off1.3_5: 532949568
-      Off1.3_2: -551846832
-      Off1.3_10: 1840003774
-      Off1.3_6: -904432373
-      Off1.3_3: -15249471
-      Off1.3_16: 1783177590
-      Off1.3_14: 430614517
-      Off1.3_11: -1937947491
-      Off1.3_15: -1630646476
-      Off1.3_9: -256600844
-      Off1.3_8: -1057213058
-      Off1.3_17: 1989482921
+      Crane1.5_4: 431406036
+      Crane1.5_2: 1623563515
+      Crane1.5_6: 186597560
+      Crane1.5_9: 165166966
+      Crane1.5_11: -1218930453
+      Crane1.5_14: -1011148415
+      Crane1.5_8: -823610014
+      Crane1.5_0: 1213556602
+      Crane1.5_1: 1390091545
+      Crane1.5_13: -2946011
+      Crane1.5_15: 1291742465
+      Crane1.5_10: -484464998
+      Crane1.5_5: -1198368931
+      Crane1.5_3: -1036059487
+      Crane1.5_12: 983604141
+      Crane1.5_7: -1563845935
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

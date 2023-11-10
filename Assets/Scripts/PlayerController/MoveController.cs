@@ -10,7 +10,8 @@ public class MoveController : MonoBehaviour
     private bool isListenKey;
     private Vector2Int lastKey , lastDirection;
     MoveByGrid moveByGrid;
-   
+
+    private bool isMooving = false;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class MoveController : MonoBehaviour
     {
         if (isListenKey && moveByGrid.IsPoleEmpty(Vector2Int.down))
         {
-            Debug.Log("PLAYER START MOVE");
+            //Debug.Log("PLAYER START MOVE");
             StartCoroutine(StartMovePlayer(Vector2Int.zero));
         }
     }
@@ -137,15 +138,23 @@ public class MoveController : MonoBehaviour
             // up
             if (Input.GetKey(KeyCode.W) || keyUp) OnClickControl(Vector2Int.up);
 
-            if (Input.anyKey && !anykeydown)
+    /*        if (Input.anyKey && !anykeydown)
             {
                 anykeydown = true;
-            }
+            }*/
 
 
-            if (!Input.anyKey && anykeydown)
+            if ((!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !keyLeft && !keyRight) && anykeydown)
             {
+                //Debug.Log("ANY KEY FALSE");
                 anykeydown = false;
+
+                if (!isMooving)
+                {
+                    //Debug.Log("Double controle");
+                    EventsController.playerIdleAnimationEvent.Invoke();
+                }
+                    
             }
                 
             
@@ -161,6 +170,13 @@ public class MoveController : MonoBehaviour
 
     private void OnClickControl(Vector2Int direction)
     {
+        if (!anykeydown)
+        {
+            anykeydown = true;
+            //Debug.Log("ANY KEY TRUE");
+        }
+             
+
         lastKey = direction;
 
         if (!isListenKey) return;
@@ -174,6 +190,7 @@ public class MoveController : MonoBehaviour
 
     private IEnumerator StartMovePlayer(Vector2Int direction)
     {
+        isMooving = true;
         //Debug.Log("TRY MOVE DIRECTION: " + direction);
 
         Vector2Int startPos = new(moveByGrid.x, moveByGrid.y);
@@ -298,7 +315,10 @@ public class MoveController : MonoBehaviour
 
         //Debug.Log("STOP ALL MOOVE");        
         EventsController.playerStopMoove.Invoke();
-        
+
+        //Debug.Log($"LastKey: {lastKey}, lastdir: {lastDirection}");        
+
+
         if (!anykeydown)
         {
             EventsController.playerIdleAnimationEvent.Invoke();
@@ -306,8 +326,9 @@ public class MoveController : MonoBehaviour
         {
             //Debug.Log("ANYKAY DOWN");
         }
-            
 
+        //Debug.Log("STOP MOOVING");
+        isMooving = false;
     }
 
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 856397465f6f54841846a887df64663b
+guid: 8eacd990d1182ce49a44f6c91d6ee996
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Off1.3_0
+      name: Crane_claw1.5_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47a13aa9c6b2a32428ee7480f5a74353
-      internalID: 1294518333
+      spriteID: a39adb9750805754ebf37f1f454da177
+      internalID: -679782683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_1
+      name: Crane_claw1.5_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 138
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +165,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59bb6f44be039a24c86c43ea4aa68026
-      internalID: 923349378
+      spriteID: fdbe0d2e66b8bde4c85cb5cc863813ed
+      internalID: -2068655119
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_2
+      name: Crane_claw1.5_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 276
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5157c3b74461f34498561f358a27b70d
-      internalID: -551846832
+      spriteID: b1020f5504b0c4a44ab358228e6fecb5
+      internalID: -1190317405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_3
+      name: Crane_claw1.5_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 414
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e238431c05705ca4ab16bed25a2eb920
-      internalID: -15249471
+      spriteID: f5d8f9ba0ab4fac498de8fc7c308e853
+      internalID: -479582214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_4
+      name: Crane_claw1.5_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 552
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,20 +228,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d695c9c01f782ac44aa909470ea876ae
-      internalID: 948480748
+      spriteID: b1fddfeedb519114cb36c8f3d2316a2a
+      internalID: -532398941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_5
+      name: Crane_claw1.5_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 690
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,20 +249,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45cfc60878e3a564093c73acb4256289
-      internalID: 532949568
+      spriteID: 88f77f24b4d21a248acdaf203192d313
+      internalID: -1924805328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_6
+      name: Crane_claw1.5_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 828
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,20 +270,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9898415503af03c41a4bbc49b234c293
-      internalID: -904432373
+      spriteID: 3fbe83146c8e1ca41a0845eaeb3a76e3
+      internalID: -91448206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_7
+      name: Crane_claw1.5_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 966
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,20 +291,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86dca190cad38154596a2bf24f66d420
-      internalID: 1257006457
+      spriteID: 832527e9760315a4fa4746211be332af
+      internalID: -1428335779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_8
+      name: Crane_claw1.5_8
       rect:
         serializedVersion: 2
-        x: 512
+        x: 1104
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,20 +312,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f88b0819af21ad4ebb2034f44d8b93d
-      internalID: -1057213058
+      spriteID: c04e5859b2563ca47ad7193b8c346eca
+      internalID: -1152165452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_9
+      name: Crane_claw1.5_9
       rect:
         serializedVersion: 2
-        x: 576
+        x: 1242
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,20 +333,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5e29cb9b69683d4daa5ad295854d0e3
-      internalID: -256600844
+      spriteID: 2fb44fb5bb609f74cbac38ce5d588dc3
+      internalID: -907284136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_10
+      name: Crane_claw1.5_10
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1380
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -354,20 +354,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f61bbe156af57e44e8198875db04d8a5
-      internalID: 1840003774
+      spriteID: 5490f3e425558bf42998a9a10e32ee80
+      internalID: -158453119
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_11
+      name: Crane_claw1.5_11
       rect:
         serializedVersion: 2
-        x: 704
+        x: 1518
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,20 +375,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81096792474d4f24f92268fba73288ec
-      internalID: -1937947491
+      spriteID: 1c9cc80d67ae52240bb86dbd3f8eb3d0
+      internalID: 1717794800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_12
+      name: Crane_claw1.5_12
       rect:
         serializedVersion: 2
-        x: 768
+        x: 1656
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,20 +396,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1007ccff8c83234db99dde0911bf7e6
-      internalID: -1341279920
+      spriteID: b8773be65c0bfca4ebdca59fbde2e300
+      internalID: 2018898839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_13
+      name: Crane_claw1.5_13
       rect:
         serializedVersion: 2
-        x: 832
+        x: 1794
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -417,20 +417,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0a2a9498a6ae01409ca0e3c6c49942f
-      internalID: 253482677
+      spriteID: 79d26feaf713fad4baba3aebedc397d7
+      internalID: -300547715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_14
+      name: Crane_claw1.5_14
       rect:
         serializedVersion: 2
-        x: 896
+        x: 1932
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,20 +438,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81297edc8f511f14287d940ffa504d36
-      internalID: 430614517
+      spriteID: ff0a65f32cea2784f9f251e2c4a965a0
+      internalID: 864202806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Off1.3_15
+      name: Crane_claw1.5_15
       rect:
         serializedVersion: 2
-        x: 960
+        x: 2070
         y: 0
-        width: 64
-        height: 74
+        width: 138
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -459,50 +459,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 651e6c3592a4ff94492a374a725fb1d9
-      internalID: -1630646476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Off1.3_16
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 64
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3721f94a69be984b90da417d6084ac7
-      internalID: 1783177590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Off1.3_17
-      rect:
-        serializedVersion: 2
-        x: 1088
-        y: 0
-        width: 64
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7575187928fc2842ae199313c3706a6
-      internalID: 1989482921
+      spriteID: d8b78a01cd9babe4591e5c24c18b7026
+      internalID: 956906888
       vertices: []
       indices: 
       edges: []
@@ -518,24 +476,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Off1.3_0: 1294518333
-      Off1.3_12: -1341279920
-      Off1.3_13: 253482677
-      Off1.3_1: 923349378
-      Off1.3_4: 948480748
-      Off1.3_7: 1257006457
-      Off1.3_5: 532949568
-      Off1.3_2: -551846832
-      Off1.3_10: 1840003774
-      Off1.3_6: -904432373
-      Off1.3_3: -15249471
-      Off1.3_16: 1783177590
-      Off1.3_14: 430614517
-      Off1.3_11: -1937947491
-      Off1.3_15: -1630646476
-      Off1.3_9: -256600844
-      Off1.3_8: -1057213058
-      Off1.3_17: 1989482921
+      Crane_claw1.5_14: 864202806
+      Crane_claw1.5_9: -907284136
+      Crane_claw1.5_6: -91448206
+      Crane_claw1.5_12: 2018898839
+      Crane_claw1.5_2: -1190317405
+      Crane_claw1.5_13: -300547715
+      Crane_claw1.5_15: 956906888
+      Crane_claw1.5_7: -1428335779
+      Crane_claw1.5_0: -679782683
+      Crane_claw1.5_5: -1924805328
+      Crane_claw1.5_3: -479582214
+      Crane_claw1.5_4: -532398941
+      Crane_claw1.5_10: -158453119
+      Crane_claw1.5_8: -1152165452
+      Crane_claw1.5_11: 1717794800
+      Crane_claw1.5_1: -2068655119
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

@@ -38,8 +38,11 @@ public class EventsController : MonoBehaviour
 
     public static UnityEvent onTakeChip = new();
 
-    //
+    // box
+    public static UnityEvent boxDownFloor = new();
 
+    // specislbox
+    public static UnityEvent tntBlowUp = new();
 
     private void OnDestroy()
     {

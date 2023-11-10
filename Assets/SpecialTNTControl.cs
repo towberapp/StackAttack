@@ -33,6 +33,9 @@ public class SpecialTNTControl : MonoBehaviour
             SpriteRenderer render = GetComponent<SpriteRenderer>();
             render.enabled = false;
             BoomCobe();
+
+            EventsController.tntBlowUp.Invoke();
+
             yield return new WaitForSeconds(2f);
             Destroy(obj);
         }
