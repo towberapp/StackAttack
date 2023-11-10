@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloudManager : MonoBehaviour
+public class CloudManagerEffect : MonoBehaviour
 {
     [Range(1f, 10f)]
     [SerializeField] private float speedCloud = 1f;
@@ -17,6 +17,7 @@ public class CloudManager : MonoBehaviour
 
     private void Awake()
     {
+
         coroutine = GenerateCloud();
 
         EventsController.PreStartEvent.AddListener(OnPreStartGame);
@@ -29,10 +30,27 @@ public class CloudManager : MonoBehaviour
         EventsController.GameOverEvent.RemoveListener(OnGameOver);
     }
 
+    //
+    private IEnumerator GenerateCloud()
+    {
+        while (true)
+        {
+            GameObject cloud = Instantiate(cloudBase);
+            cloud.transform.position = new Vector3(-5f, SystemStatic.level + 7f + Random.Range(0f, 5f), 0);
+
+            Cloud component = cloud.GetComponent<Cloud>();
+            component.moveSpeed = Random.Range(0.1f, 0.2f) * speedCloud;
+            component.SetSprite(GetRandomSprite());
+
+            yield return new WaitForSeconds(Random.Range(1f, 2.5f) * cloudFrequinsy);
+        }
+
+    }
+    //
+
     private void OnGameOver()
     {
         StopCoroutine(coroutine);
-        //
     }
 
     private void OnPreStartGame(int row)
@@ -40,21 +58,7 @@ public class CloudManager : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator GenerateCloud()
-    {
-        while(true)
-        {
-            GameObject cloud = Instantiate(cloudBase);
-                       cloud.transform.position = new Vector3(-5f, SystemStatic.level + 5f + Random.Range(0f, 5f), 0);
-
-            Cloud component = cloud.GetComponent<Cloud>();
-                  component.moveSpeed = Random.Range(0.1f, 0.2f) * speedCloud;            
-                  component.SetSprite(GetRandomSprite());
-
-            new WaitForSeconds(Random.Range(1f,2.5f) * cloudFrequinsy);
-        }
-        
-    }
+  
 
 
     Sprite GetRandomSprite()

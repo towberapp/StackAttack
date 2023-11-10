@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
+    [SerializeField] private GameObject puff;
+    
     MoveByGrid moveByGrid;
+    
 
     private void Awake()
     {
@@ -21,16 +24,32 @@ public class ColliderController : MonoBehaviour
             {
                 if ((transform.position.y - SystemStatic.level - moveByGrid.y + 1) > 0.6 && moveByGrid.isMove)
                 {
+                    Instantiate(puff, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
+
                     collision.gameObject.SendMessage("DestroyCube");
+
                 } else
                 {
-                    EventsController.GameOverEvent.Invoke();
+                    Invoke("GameOver", 1f);
+                    SystemStatic.isStartGame = false;
+
+                    GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+                    EventsController.playerDestroyAnimationEvent.Invoke();
+                    //EventsController.GameOverEvent.Invoke();
                 }
             } else
             {
-                EventsController.GameOverEvent.Invoke();
-            }
+                Invoke("GameOver", 1f);
+                SystemStatic.isStartGame = false;
 
+                GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+                EventsController.playerDestroyAnimationEvent.Invoke();
+            }
+    }
+
+    private void GameOver()
+    {
+        EventsController.GameOverEvent.Invoke();
     }
 
     

@@ -27,8 +27,6 @@ public class CoinSceneController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Coin Trigger: Player");
-
             EventsController.onTakeChip.Invoke();
             Instantiate(piupiu, transform.position, Quaternion.identity);
 
@@ -38,8 +36,6 @@ public class CoinSceneController : MonoBehaviour
         // если столкнулся с кубом - уничтожить
         if (collision.CompareTag("Cube")) 
         {            
-            Debug.Log("Coin Trigger: Cube");
-
             Instantiate(piupiuRed, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

@@ -33,6 +33,9 @@ public class SpecialTNTControl : MonoBehaviour
             SpriteRenderer render = GetComponent<SpriteRenderer>();
             render.enabled = false;
             BoomCobe();
+
+            EventsController.tntBlowUp.Invoke();
+
             yield return new WaitForSeconds(2f);
             Destroy(obj);
         }
@@ -76,8 +79,10 @@ public class SpecialTNTControl : MonoBehaviour
         if (pos.x == MainConfig.playerX && pos.y == MainConfig.playerY)
         {
             //gameOver
-            Debug.Log("GameOver 1");
-            EventsController.GameOverEvent.Invoke();
+            EventsController.playerDestroyAnimationEvent.Invoke();
+            EventsController.playerBoomAnimationEvent.Invoke();
+
+            Invoke("GameOver", 1f);
             return;            
         }
  
@@ -91,7 +96,7 @@ public class SpecialTNTControl : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("GameOver 2");        
+        EventsController.GameOverEvent.Invoke();
     }
 
 }

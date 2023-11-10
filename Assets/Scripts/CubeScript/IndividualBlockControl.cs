@@ -53,6 +53,8 @@ public class IndividualBlockControl : MonoBehaviour
 
     public void DestroyCube()
     {
+        if (moveByGrid.y < 0) return;
+
         GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
         Destroy(gameObject);
     }
@@ -79,12 +81,13 @@ public class IndividualBlockControl : MonoBehaviour
             isCanMoove = false;
 
         if (isEmpty && isEmptyUp && isCanMoove)
-        {            
-            if (auto)
-                EventsController.playerPushAnimationEvent.Invoke();
-                        
+        {
+            EventsController.blockMoove.Invoke(true);
             GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, direction);
             StartCoroutine(StartMoveBlock(direction, 3));
+        } else
+        {
+            EventsController.blockMoove.Invoke(false);
         }
     }
 
@@ -124,6 +127,7 @@ public class IndividualBlockControl : MonoBehaviour
         isMoving = false;
 
         touchGround.Invoke();
+        EventsController.boxDownFloor.Invoke();
 
         CheckUnderGround();
 

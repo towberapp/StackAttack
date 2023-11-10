@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class CraneController : MonoBehaviour
 {
+    [SerializeField] private bool isStopCran = false;
+
     [SerializeField] private GameObject cranGroup;
     [SerializeField] private GameObject cranPrefab;     
 
@@ -18,6 +20,8 @@ public class CraneController : MonoBehaviour
 
     private void NewCube(GameObject block, int xPos)
     {
+        if (isStopCran) return;
+
         Vector3 pos = cranGroup.transform.position;
         GameObject obj = Instantiate(cranPrefab, pos, Quaternion.identity, cranGroup.transform);        
 
