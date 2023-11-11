@@ -68,25 +68,75 @@ public class IndividualBlockControl : MonoBehaviour
             if (moveByGrid.IsPoleEmpty(Vector2Int.down))
                 StartCoroutine(StartMoveBlock(Vector2Int.zero, 2));
         }
+
+        // обновим слой куба
+        if (moveByGrid.y >= 0)
+            rend.sortingOrder = moveByGrid.y;
     }
 
     // checkToMove
     public void MoveBlock(Vector2Int direction, bool auto = true)
-    {
+    {  
         bool isEmpty = moveByGrid.IsPoleEmpty(direction);
         bool isEmptyUp = moveByGrid.IsPoleEmpty(Vector2Int.up);
         bool isCanMoove = true;
 
+        // bonus blocl msg
+        if (GetComponent<BonusBlockScript>() != null && isEmptyUp)
+        {
+            BonusBlockScript bonusBlockScript = GetComponent<BonusBlockScript>();
+            bonusBlockScript.TryTouchBonusBlock();
+            DestroyCube();
+            return;
+        }
+
+        // несдвигаемый блок
         if (GetComponent<NoMooveCube>() != null)
-            isCanMoove = false;
+        {
+            // проверим дополнительно на бонус сдвигания
+
+            if (BonusController.activatedBonus == BonusController.ActivatedStatus.active && 
+                BonusController.activatedBonusType.objectName == "Power")
+            {                
+                BonusController.onUseBonus.Invoke();
+                BonusController.bonusPowerEvent.Invoke();
+
+                NoMooveCube componentToRemove = GetComponent<NoMooveCube>();
+                Destroy(componentToRemove);
+
+            } else
+            {
+                isCanMoove = false;
+            }
+        }
+
+     
+
 
         if (isEmpty && isEmptyUp && isCanMoove)
         {
             EventsController.blockMoove.Invoke(true);
             GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, direction);
             StartCoroutine(StartMoveBlock(direction, 3));
+
         } else
         {
+            // не можем двигать блок, значит взрываем, если есть бонус
+            // проверим бонус двойного прыжка
+            if (BonusController.activatedBonus == BonusController.ActivatedStatus.active)
+            {
+                if (BonusController.activatedBonusType.objectName == "DeadSpace")
+                {
+                    BonusController.onUseBonus.Invoke();
+                    BonusController.bonusDeadSpaceEvent.Invoke();
+
+                    Instantiate(BonusController.boomBoxStatic, transform.position, transform.rotation);
+
+                    DestroyCube();
+                    return;
+                }
+            }
+
             EventsController.blockMoove.Invoke(false);
         }
     }

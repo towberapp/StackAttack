@@ -19,6 +19,21 @@ public class GridController : MonoBehaviour
         yPole = yPoleSetup;
         EventsController.PreStartEvent.AddListener(OnPreStartGame);
     }
+/*
+    private void StartGenerateGrid()
+    {
+        mainGrid[0, 0] = 1;
+        mainGrid[1, 0] = 1;
+        mainGrid[2, 1] = 1;
+        mainGrid[2, 2] = 1;
+        mainGrid[2, 0] = 1;
+        mainGrid[4, 0] = 1;
+        mainGrid[4, 1] = 1;
+        mainGrid[5, 0] = 1;
+        mainGrid[5, 1] = 1;
+        mainGrid[5, 2] = 1;
+        mainGrid[6, 0] = 1;
+    }*/
 
     private void OnPreStartGame(int row)
     {
@@ -72,7 +87,7 @@ public class GridController : MonoBehaviour
 
 
     public static void MoveBlock(Vector2Int blockPos, Vector2Int direction)
-    {
+    {       
         Vector2Int blockTop = blockPos + Vector2Int.up;
 
         if (!IsOutOfRange(blockPos) && !IsInArray(blockPos) && !IsInArray(blockTop))
@@ -83,12 +98,74 @@ public class GridController : MonoBehaviour
       
         if (!IsOutOfRange(blockPos) && IsInArray(blockPos))
         {
-            //print("MOVE BLOCK IN ARRAR: " + blockPos);
+            // если есть бонус мощности
+            if (BonusController.activatedBonus == BonusController.ActivatedStatus.active &&
+                BonusController.activatedBonusType.objectName == "Power")
+                {
+                    BonusPowerMoveBlock(blockPos, direction);
+                    return;
+                }
+
+
             GameObject block = blockGrid[blockPos.x, blockPos.y];
             IndividualBlockControl 
                 individualBlockControl = block.GetComponent<IndividualBlockControl>();
                 individualBlockControl.MoveBlock(direction);
         }
+
+    }
+
+    public static void BonusPowerMoveBlock(Vector2Int blockPos, Vector2Int direction)
+    {
+        Vector2Int blockTop = blockPos + Vector2Int.up;
+        Vector2Int blockTopNext = blockPos + Vector2Int.up;
+
+        // если за блоком нет второго блока, то не запускаем бонус
+        if (!IsOutOfRange(blockPos) && IsInArray(blockPos) && !IsOutOfRange(blockPos + direction) && !IsInArray(blockPos + direction))
+        {
+            //Debug.Log("Одиночный, не применяем бонус, пробуем толкать");
+
+            GameObject blockBasic = blockGrid[blockPos.x, blockPos.y];
+            IndividualBlockControl
+                individualBlockControlBasic = blockBasic.GetComponent<IndividualBlockControl>();
+                individualBlockControlBasic.MoveBlock(direction);
+            return;
+        }
+
+        //Debug.Log("ПРобуем толкать двойной");
+
+        // если за вторым блоком выход за границы - ничего не делаем
+        if (IsOutOfRange(blockPos + direction + direction)) return;
+
+        //Debug.Log("тест 1");
+
+        // если за двумя блоками есть третий, ничего не делаем
+        if (IsInArray(blockPos + direction + direction)) return;
+
+        //Debug.Log("тест 2");
+
+        // если на одном из двух блоков что-то стоит - ничего не делаем
+        if (IsInArray(blockTop) || IsInArray(blockTopNext)) return;
+
+        //Debug.Log("тест 3");
+
+        // вроде всё ок, можно толкать.
+
+        // вначале толкаем дальний
+        GameObject blockNext = blockGrid[blockPos.x + direction.x, blockPos.y];
+            IndividualBlockControl
+            individualBlockControlNext = blockNext.GetComponent<IndividualBlockControl>();
+            individualBlockControlNext.MoveBlock(direction);
+
+        // потом ближний
+        GameObject block = blockGrid[blockPos.x, blockPos.y];
+        IndividualBlockControl
+            individualBlockControl = block.GetComponent<IndividualBlockControl>();
+            individualBlockControl.MoveBlock(direction);
+
+        // активируем бонус
+        BonusController.onUseBonus.Invoke();
+        BonusController.bonusPowerEvent.Invoke();
 
     }
 
@@ -159,19 +236,4 @@ public class GridController : MonoBehaviour
     
 
 
-
-  /*  private void StartGenerateGrid()
-    {
-        mainGrid[0, 0] = 1;
-        mainGrid[1, 0] = 1;
-        mainGrid[2, 1] = 1;
-        mainGrid[2, 2] = 1;
-        mainGrid[2, 0] = 1;
-        mainGrid[4, 0] = 1;
-        mainGrid[4, 1] = 1;
-        mainGrid[5, 0] = 1;
-        mainGrid[5, 1] = 1;
-        mainGrid[5, 2] = 1;
-        mainGrid[6, 0] = 1;
-    }*/
 }
