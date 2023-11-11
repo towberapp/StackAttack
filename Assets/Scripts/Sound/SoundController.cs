@@ -22,7 +22,15 @@ public class SoundController : MonoBehaviour
     [Header("NextLevel")]
     [SerializeField] private AudioSource nextlevel;
 
+    [Header("Bonus")]
+    [SerializeField] private AudioSource takeBonus;
+    [SerializeField] private AudioSource activateBonus;
 
+    [Header("Bonus Box")]
+    [SerializeField] private AudioSource jump;
+    [SerializeField] private AudioSource dead;
+    [SerializeField] private AudioSource magnet;
+    [SerializeField] private AudioSource power;
 
 
     public enum Status
@@ -56,6 +64,44 @@ public class SoundController : MonoBehaviour
         EventsController.NextLevelEvent.AddListener(OnNextLevel);
         EventsController.onTakeChip.AddListener(OnTakeChip);
 
+        BonusController.onTakeBonus.AddListener(OnTakeBonus);
+        BonusController.onActiveBonus.AddListener(OnActivatBonus);
+
+        // bonus box event
+        BonusController.bonusJumpEvent.AddListener(OnbonusJumpEvent);
+        BonusController.bonusDeadSpaceEvent.AddListener(OnbonusDeadSpaceEvent);
+        BonusController.bonusMagetEvent.AddListener(OnbonusMagetEvent);
+        BonusController.bonusPowerEvent.AddListener(OnbonusPowerEvent);
+    }
+
+    private void OnbonusPowerEvent()
+    {
+        power.Play();
+    }
+
+    private void OnbonusMagetEvent()
+    {
+        magnet.Play();
+    }
+
+    private void OnbonusDeadSpaceEvent()
+    {
+        dead.Play();
+    }
+
+    private void OnbonusJumpEvent()
+    {
+        jump.Play();
+    }
+
+    private void OnActivatBonus(BonusTypeSO arg0)
+    {
+        activateBonus.Play();
+    }
+
+    private void OnTakeBonus(BonusTypeSO arg0)
+    {
+        takeBonus.Play();
     }
 
     private void OnNextLevel()

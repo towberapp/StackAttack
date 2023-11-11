@@ -205,6 +205,7 @@ public class MoveController : MonoBehaviour
 
             Vector2Int newDirection = ChangeDirection(direction);
             EventsController.playerDirectionEvent.Invoke(newDirection.x);
+
             Vector2Int destination = moveByGrid.GetMoveDestination(newDirection);
             
             ChangePos(newDirection);
@@ -212,16 +213,16 @@ public class MoveController : MonoBehaviour
 
             //Debug.Log("Direction move: " + direction);
 
-            if (direction == (Vector2Int.up + Vector2Int.right))
+            if (newDirection == (Vector2Int.up + Vector2Int.right))
                 EventsController.playerJumpAnimationEvent.Invoke(1);
 
-            if (direction == (Vector2Int.up + Vector2Int.left))
+            if (newDirection == (Vector2Int.up + Vector2Int.left))
                 EventsController.playerJumpAnimationEvent.Invoke(-1);
 
-            if (direction == (Vector2Int.up))
+            if (newDirection == Vector2Int.up || direction == Vector2Int.up*2)
                 EventsController.playerJumpAnimationEvent.Invoke(0);
 
-            if (direction == Vector2Int.right || direction == Vector2Int.left)
+            if (newDirection == Vector2Int.right || direction == Vector2Int.left)
                 EventsController.playerRunAnimationEvent.Invoke();
 
 
@@ -419,6 +420,17 @@ public class MoveController : MonoBehaviour
             {
                 return Vector2Int.up*2;
             }        
+
+            // проверим бонус двойного прыжка
+            if (BonusController.activatedBonus == BonusController.ActivatedStatus.active)
+            {
+                if (BonusController.activatedBonusType.objectName == "Jump")
+                {                    
+                    BonusController.onUseBonus.Invoke();
+                    BonusController.bonusJumpEvent.Invoke();
+                    return Vector2Int.up * 2;
+                }
+            }
 
             if (moveByGrid.IsPoleEmpty(Vector2Int.down))
             {

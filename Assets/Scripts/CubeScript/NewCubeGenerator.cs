@@ -20,13 +20,15 @@ public class NewCubeGenerator : MonoBehaviour
     private float time = 0.0f;
     private int lastRand = -1;
 
+    private bool stopCran = false;
+
      
     private void Update()
     {
         if (!SystemStatic.isGameOver && SystemStatic.isStartGame) 
         { 
             time += Time.deltaTime;
-            if (time >= MainConfig.intervalCube)
+            if (time >= MainConfig.intervalCube && !stopCran)
             {
                 time = 0.0f;
                 NewBlock();
@@ -34,10 +36,29 @@ public class NewCubeGenerator : MonoBehaviour
         }
     }
 
+
+
     private void Awake()
     {
         EventsController.StartEvent.AddListener(OnStartGame);
         EventsController.DropCran.AddListener(DropCranEvent);
+
+        BonusController.bonusTimeEvent.AddListener(OnTimerStop);
+    }
+
+    private void OnTimerStop()
+    {
+        StartCoroutine(WaitAndStopTimer(5f));
+    }
+
+    private IEnumerator WaitAndStopTimer(float seconds)
+    {
+        Debug.Log("BONUS -> TIMER START");
+        stopCran = true;
+        yield return new WaitForSeconds(seconds);
+        stopCran = false;
+        Debug.Log("BONUS -> TIMER USED");
+        BonusController.onUseBonus.Invoke();
     }
 
 
