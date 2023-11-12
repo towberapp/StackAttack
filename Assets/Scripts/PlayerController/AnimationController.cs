@@ -43,6 +43,11 @@ public class AnimationController : MonoBehaviour
     {
         //Debug.Log("ANIM -> DAMAGE BOX");
         anim.SetTrigger("DamgeBox");
+
+        anim.SetBool("Off", false);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Run", false);
+
         StopCoroutine(courutoneWhaitOff);
     }
 

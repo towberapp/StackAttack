@@ -7,13 +7,20 @@ using UnityEngine.Events;
 public class EventsController : MonoBehaviour
 {
     // GameStatus
+    public static UnityEvent BeforeGameOverEvent = new();
     public static UnityEvent GameOverEvent = new();
     public static UnityEvent StartEvent = new();
     public static UnityEvent<int> PreStartEvent = new();
+    public static UnityEvent<bool> SetPauseGameEvent = new();
+    public static UnityEvent RestorePlayer = new();
+    //public static UnityEvent TestEvent = new();
 
 
     public static UnityEvent NextLevelEvent = new();
     public static UnityEvent UpgradeGridEvent = new();
+    public static UnityEvent<int> updateCoinEvent = new();
+    public static UnityEvent<int> updateLevelRecord = new();
+    public static UnityEvent<int> countGameEvent = new();
 
     public static UnityEvent PlayerMove = new();
 
@@ -44,6 +51,14 @@ public class EventsController : MonoBehaviour
     // specislbox
     public static UnityEvent tntBlowUp = new();
 
+    //ads
+    public static UnityEvent<bool> loadAdSuccesEvent = new();
+    public static UnityEvent revarderDone = new();
+    public static UnityEvent revarderClick = new();
+    public static UnityEvent revarderFail = new();
+    public static UnityEvent revarderClose = new();
+    public static UnityEvent revarderShow = new();
+
     private void OnDestroy()
     {
         GameOverEvent.RemoveAllListeners();
@@ -53,6 +68,7 @@ public class EventsController : MonoBehaviour
         UpgradeGridEvent.RemoveAllListeners();
         moveCubeEvent.RemoveAllListeners();
         CheckForBrakeEvent.RemoveAllListeners();
+        SetPauseGameEvent.RemoveAllListeners();
 
         playerRunAnimationEvent.RemoveAllListeners();
         playerPushAnimationEvent.RemoveAllListeners();

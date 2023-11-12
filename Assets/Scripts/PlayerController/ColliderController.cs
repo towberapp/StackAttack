@@ -49,7 +49,9 @@ public class ColliderController : MonoBehaviour
 
     private void GameOver()
     {
-        EventsController.GameOverEvent.Invoke();
+        //EventsController.GameOverEvent.Invoke();
+
+        EventsController.BeforeGameOverEvent.Invoke();
     }
 
     
