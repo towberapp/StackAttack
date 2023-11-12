@@ -38,6 +38,7 @@ public class MainUIController : MonoBehaviour
         EventsController.NextLevelEvent.AddListener(OnLevelChange);
         EventsController.GameOverEvent.AddListener(OnGameOver);
         EventsController.StartEvent.AddListener(OnStartGame);
+        EventsController.SetPauseGameEvent.AddListener(SetPauseGame);
 
         newGameBtn.onClick.AddListener(OnNewGame);
         leftMenuBtn.onClick.AddListener(OnLeftMenuClick);

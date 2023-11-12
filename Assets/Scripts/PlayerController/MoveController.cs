@@ -19,6 +19,21 @@ public class MoveController : MonoBehaviour
         EventsController.UpgradeGridEvent.AddListener(OnChageGrid);
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
         EventsController.StartEvent.AddListener(OnStart);
+        EventsController.RestorePlayer.AddListener(OnRestore);
+    }
+
+    private void OnRestore()
+    {
+        Debug.Log("StartRestore");
+
+        moveByGrid.y++;
+
+        GridController.blockGrid[moveByGrid.x, moveByGrid.y] = gameObject;
+        GridController.mainGrid[moveByGrid.x, moveByGrid.y] = 2;        
+
+        Vector2Int newPlayerPos = new Vector2Int(moveByGrid.x, moveByGrid.y);
+        transform.position = (Vector2)newPlayerPos;
+        SystemStatic.isStartGame = true;
     }
 
     private void OnStart()
@@ -27,6 +42,8 @@ public class MoveController : MonoBehaviour
         GridController.blockGrid[playerPos.x, playerPos.y] = gameObject;
         GridController.mainGrid[playerPos.x, playerPos.y] = 2;
     }
+
+
 
     private void OnLevelUp()
     {

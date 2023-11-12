@@ -36,6 +36,7 @@ public class CoinController : MonoBehaviour
         SystemStatic.coin += coin;
         playerpref.UpdateCoin();
         StartCoroutine(CointVisual(coin));
+        EventsController.updateCoinEvent.Invoke(SystemStatic.coin);
     }
 
 

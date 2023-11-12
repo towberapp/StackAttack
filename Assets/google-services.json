@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "78234100675",
+    "firebase_url": "https://stack-attack-d06b7-default-rtdb.firebaseio.com",
+    "project_id": "stack-attack-d06b7",
+    "storage_bucket": "stack-attack-d06b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78234100675:android:8d524d7a2a9159cbabd376",
+        "android_client_info": {
+          "package_name": "ua.pp.iber.stackatack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMYmjP32zQwFt8DkNIOrr_DLyhJ99McTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

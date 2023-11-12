@@ -8,6 +8,7 @@ public class PlayerPrefsController
 
     private string levelRecord = "levelRecord";
     private string coin = "coin";
+    private string countGame = "countGame";
 
     public int GetCoin()
     {
@@ -31,7 +32,22 @@ public class PlayerPrefsController
         //Debug.Log("SystemStatic.levelRecord: " + SystemStatic.levelRecord);
 
         if (SystemStatic.level > SystemStatic.levelRecord)
+        {
+            EventsController.updateLevelRecord.Invoke(SystemStatic.level);
             PlayerPrefs.SetInt(levelRecord, SystemStatic.level);
+        }            
+    }
+
+    public void UpdateCountStartGame()
+    {
+        int countgame = PlayerPrefs.GetInt(countGame);
+            countgame++;
+
+        PlayerPrefs.SetInt(countGame, countgame);
+
+        EventsController.countGameEvent.Invoke(countgame);
+
+        Debug.Log("Количество игр: " + countgame);
     }
 
 }

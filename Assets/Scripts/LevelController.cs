@@ -12,9 +12,14 @@ public class LevelController : MonoBehaviour
     private void Awake()
     {
         EventsController.NextLevelEvent.AddListener(OnLevelUp);
+        EventsController.StartEvent.AddListener(OnStartLevel);
         SystemStatic.levelRecord = playerpref.GetLevelRecord();
     }
- 
+
+    private void OnStartLevel()
+    {
+        playerpref.UpdateCountStartGame();
+    }
 
     private void OnLevelUp()
     {

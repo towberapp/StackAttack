@@ -203,8 +203,8 @@ public class GridController : MonoBehaviour
     {
         for (int y = 0; y < yPole; y++)
             for (int x = 0; x < xPole; x++)
-                if (mainGrid[x, y] == 1)
-                    Debug.LogFormat("In GRID: {0}, {1}", x, y);
+                if (mainGrid[x, y] > 0)
+                    Debug.LogFormat("In GRID: {0}, {1} - {2}", x, y, mainGrid[x, y]);
 
         Debug.Log("-------------------");
     }
