@@ -15,7 +15,7 @@ public class BonusPlayerIcon : MonoBehaviour
     private void OnActiveBonus(BonusTypeSO arg0)
     {
         icon.enabled = true;
-        icon.sprite = arg0.mainSprite;
+        icon.sprite = arg0.iconSprite;
     }
 
     private void OnUseBonus()

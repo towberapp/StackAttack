@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: DeadSpace
   mainSprite: {fileID: 21300000, guid: 68b0d35b15d211843b5223d27a3566f5, type: 3}
+  iconSprite: {fileID: 21300000, guid: 5eb24c4f026211e46acb22a0be488e7a, type: 3}

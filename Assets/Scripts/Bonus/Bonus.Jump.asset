@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Jump
   mainSprite: {fileID: 21300000, guid: 0f9363f3818e9ef44b7b3234f2f3bd39, type: 3}
+  iconSprite: {fileID: 21300000, guid: 12dc24b1420e1914fbff3f0d7ab1b910, type: 3}

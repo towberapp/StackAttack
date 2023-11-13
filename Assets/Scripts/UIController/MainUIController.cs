@@ -56,7 +56,7 @@ public class MainUIController : MonoBehaviour
 
     private void Start()
     {        
-        SetPauseGame(true);
+        SetPauseGame(false);
         mainMenuObj.SetActive(true);
         leftMenuBtnObj.SetActive(false);        
 

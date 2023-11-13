@@ -127,12 +127,18 @@ public class IndividualBlockControl : MonoBehaviour
             {
                 if (BonusController.activatedBonusType.objectName == "DeadSpace")
                 {
+                    // надо чуть задержать движение игрока, что бы кубы выше взорванного блока начали падать.
+                    SystemStatic.isStartGame = false;
+
                     BonusController.onUseBonus.Invoke();
                     BonusController.bonusDeadSpaceEvent.Invoke();
 
                     Instantiate(BonusController.boomBoxStatic, transform.position, transform.rotation);
 
                     DestroyCube();
+
+                    SystemStatic.isStartGame = true;
+
                     return;
                 }
             }

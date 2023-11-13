@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Time
   mainSprite: {fileID: 21300000, guid: 01a37eca1ead1274dbc373bc72a0e2ae, type: 3}
+  iconSprite: {fileID: 21300000, guid: 0bd84b92016227843ada6c12d8211dd1, type: 3}

@@ -25,26 +25,50 @@ public class ColliderController : MonoBehaviour
                 if ((transform.position.y - SystemStatic.level - moveByGrid.y + 1) > 0.6 && moveByGrid.isMove)
                 {
                     Instantiate(puff, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
-
                     collision.gameObject.SendMessage("DestroyCube");
 
                 } else
                 {
-                    Invoke("GameOver", 1f);
+                    Debug.Log("Start Deth in fly");
                     SystemStatic.isStartGame = false;
+                    DeletePlayer();
 
-                    GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+                    Invoke("GameOver", 1.5f);                    
+
+                    // удалим игрока
+                    //DeletePlayer();
                     EventsController.playerDestroyAnimationEvent.Invoke();
-                    //EventsController.GameOverEvent.Invoke();
+
                 }
             } else
             {
-                Invoke("GameOver", 1f);
+                Debug.Log("Start Deth");
                 SystemStatic.isStartGame = false;
 
-                GridController.DeleteCube(moveByGrid.x, moveByGrid.y);
+                DeletePlayer();
+
+                Invoke("GameOver", 1.5f);                                
                 EventsController.playerDestroyAnimationEvent.Invoke();
             }
+    }
+
+    private void DeletePlayer()
+    {
+        Vector2Int posPlayer = new Vector2Int(MainConfig.playerX, MainConfig.playerY);
+        GameObject player = GridController.blockGrid[posPlayer.x, posPlayer.y];
+
+        if (player == null) return;
+
+        if (player.CompareTag("Player"))
+        {
+            Debug.Log($"Try Del player -> pos: {posPlayer}, obj: {player}");
+            GridController.DeleteCube(posPlayer.x, posPlayer.y);
+        }            
+        else
+        {
+            Debug.Log($"Try Del player -> pos: {posPlayer}, obj: {player}");
+            Debug.LogWarning("Ошибка удаления игрока");
+        }           
     }
 
     private void GameOver()

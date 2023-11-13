@@ -22,7 +22,7 @@ public class BonusUIButton : MonoBehaviour
         button.interactable = true;
 
         image.enabled = true;
-        image.sprite = bonus.mainSprite;
+        image.sprite = bonus.iconSprite;
         bonusType = bonus;
     }
 

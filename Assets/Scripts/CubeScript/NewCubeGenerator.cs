@@ -8,6 +8,7 @@ public class NewCubeGenerator : MonoBehaviour
     [Header("Settings")]
 
     [SerializeField] [Range(0, 10)] private int specialCubePercent;
+    [SerializeField][Range(5f, 15f)] private float timerForTimeBonus = 7f;
 
     [Header("Cubes")]
 
@@ -48,16 +49,18 @@ public class NewCubeGenerator : MonoBehaviour
 
     private void OnTimerStop()
     {
-        StartCoroutine(WaitAndStopTimer(5f));
+        //Debug.Log("ON TIMER STOP PRESTRT");
+
+        StartCoroutine(WaitAndStopTimer(timerForTimeBonus));
     }
 
     private IEnumerator WaitAndStopTimer(float seconds)
     {
-        Debug.Log("BONUS -> TIMER START");
+        //Debug.Log("BONUS -> TIMER START");
         stopCran = true;
         yield return new WaitForSeconds(seconds);
         stopCran = false;
-        Debug.Log("BONUS -> TIMER USED");
+        //Debug.Log("BONUS -> TIMER USED");
         BonusController.onUseBonus.Invoke();
     }
 

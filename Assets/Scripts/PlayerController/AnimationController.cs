@@ -41,19 +41,21 @@ public class AnimationController : MonoBehaviour
 
     private void OnDestroyPers()
     {
-        //Debug.Log("ANIM -> DAMAGE BOX");
-        anim.SetTrigger("DamgeBox");
-
+        Debug.Log("ANIM -> DAMAGE BOX");
+        
         anim.SetBool("Off", false);
         anim.SetBool("Idle", false);
         anim.SetBool("Run", false);
+        anim.SetBool("BlockMoove", false);
+
+        anim.SetTrigger("DamgeBox");
 
         StopCoroutine(courutoneWhaitOff);
     }
 
     private void OnBlockMoove(bool arg0)
     {
-        //Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
+        Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
 
         anim.SetBool("BlockMoove", arg0);
         
@@ -89,7 +91,7 @@ public class AnimationController : MonoBehaviour
     {
         //if (currentStatus == Status.Idle) return;
 
-        //Debug.Log("ANIM -> IDLE");   
+        Debug.Log("ANIM -> IDLE");   
                 
         anim.SetBool("Idle", true);
         anim.SetBool("BlockMoove", false);
@@ -103,7 +105,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnRun()
     {
-        //Debug.Log("ANIM -> RUN");
+        Debug.Log("ANIM -> RUN");
 
         if (currentStatus == Status.Run) return;
         if (currentStatus == Status.Jump) return;

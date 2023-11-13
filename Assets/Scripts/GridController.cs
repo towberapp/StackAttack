@@ -184,7 +184,7 @@ public class GridController : MonoBehaviour
         mainGrid[x + move.x, y + move.y] = type;
         mainGrid[x, y] = 0;
 
-        //ShowGrid();
+        //  ShowGrid();
 
         CheckForNexLevel();
         CheckForGameOver();
@@ -196,6 +196,8 @@ public class GridController : MonoBehaviour
     {
         blockGrid[x, y] = null;
         mainGrid[x, y] = 0;
+
+        EventsController.UpgradeGridEvent.Invoke();
     }
 
 

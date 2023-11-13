@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Power
   mainSprite: {fileID: 21300000, guid: 57daaed897bb2014db3a8b08de417a39, type: 3}
+  iconSprite: {fileID: 21300000, guid: 4828a8f353029a549a1ee0fc2b71beeb, type: 3}
