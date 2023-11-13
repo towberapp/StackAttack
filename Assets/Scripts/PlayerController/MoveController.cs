@@ -28,12 +28,17 @@ public class MoveController : MonoBehaviour
 
         moveByGrid.y++;
 
+        MainConfig.playerX = moveByGrid.x;
+        MainConfig.playerY = moveByGrid.y;
+
         GridController.blockGrid[moveByGrid.x, moveByGrid.y] = gameObject;
         GridController.mainGrid[moveByGrid.x, moveByGrid.y] = 2;        
 
         Vector2Int newPlayerPos = new Vector2Int(moveByGrid.x, moveByGrid.y);
         transform.position = (Vector2)newPlayerPos;
         SystemStatic.isStartGame = true;
+
+        EventsController.UpgradeGridEvent.Invoke();
     }
 
     private void OnStart()
@@ -207,6 +212,9 @@ public class MoveController : MonoBehaviour
 
     private IEnumerator StartMovePlayer(Vector2Int direction)
     {
+        if (!SystemStatic.isStartGame) yield break;
+
+
         isMooving = true;
         //Debug.Log("TRY MOVE DIRECTION: " + direction);
 
@@ -216,7 +224,7 @@ public class MoveController : MonoBehaviour
         isListenKey = false;
         moveByGrid.isMove = true;
 
-        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero && !SystemStatic.isGameOver)
+        if (IsCanPlayerMove(direction) && direction != Vector2Int.zero && !SystemStatic.isGameOver && SystemStatic.isStartGame)
         {
             isCantMoove = true;
 
@@ -247,7 +255,7 @@ public class MoveController : MonoBehaviour
 
         } else
         {            
-            if (isCantMoove)
+            if (isCantMoove && SystemStatic.isStartGame)
             {
                 Debug.Log("IS CANT MOOVE");
                 EventsController.playerIdleAnimationEvent.Invoke();
@@ -257,7 +265,7 @@ public class MoveController : MonoBehaviour
 
         Vector2Int nextDirection = GetNextDirection(direction);
 
-        if (nextDirection != Vector2Int.zero)
+        if (nextDirection != Vector2Int.zero && SystemStatic.isStartGame)
         {
             //if (!moveByGrid.IsPoleEmpty(nextDirection + Vector2Int.down))
             {
@@ -287,9 +295,10 @@ public class MoveController : MonoBehaviour
             }
         }
 
-        while (moveByGrid.IsPoleEmpty(Vector2Int.down))
-        {
+        while (moveByGrid.IsPoleEmpty(Vector2Int.down) && SystemStatic.isStartGame)
+        {            
             EventsController.playerIdleAnimationEvent.Invoke();
+            
             Vector2Int destination = moveByGrid.GetMoveDestination(Vector2Int.down);
             ChangePos(Vector2Int.down);
             lastKey = Vector2Int.down;
@@ -337,7 +346,7 @@ public class MoveController : MonoBehaviour
         //Debug.Log($"LastKey: {lastKey}, lastdir: {lastDirection}");        
 
 
-        if (!anykeydown)
+        if (!anykeydown && SystemStatic.isStartGame)
         {
             EventsController.playerIdleAnimationEvent.Invoke();
         } else
@@ -395,7 +404,7 @@ public class MoveController : MonoBehaviour
 
     private void ChangePos(Vector2Int dir)
     {
-
+        if (!SystemStatic.isStartGame) return;
 
         GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, dir, 2);
 

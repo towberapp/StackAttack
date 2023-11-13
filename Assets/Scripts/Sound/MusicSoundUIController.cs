@@ -55,10 +55,10 @@ public class MusicSoundUIController : MonoBehaviour
 
     private void SetButtons()
     {
-        Debug.Log($"Music: {isMusic}, Sound: {isSound}");
+        //Debug.Log($"Music: {isMusic}, Sound: {isSound}");
 
-        musicButton.color = GetColor(isMusic);
-        soundButton.color = GetColor(isSound);
+        musicButton.color = GetColor(isMusic, musicButton.color);
+        soundButton.color = GetColor(isSound, musicButton.color);
 
         musicEvent.Invoke(isMusic);
         soundEvent.Invoke(isSound);
@@ -67,12 +67,12 @@ public class MusicSoundUIController : MonoBehaviour
 
         if (isSound)
         {
-            Debug.Log("SOUND ON");
+            //Debug.Log("SOUND ON");
             audioMixer.SetFloat("Vol", 0f);
         }            
         else
         {
-            Debug.Log("SOUND OFF");
+            //Debug.Log("SOUND OFF");
             audioMixer.SetFloat("Vol", -80f);
         }
             
@@ -84,9 +84,9 @@ public class MusicSoundUIController : MonoBehaviour
     private bool IntToBool(int num) => num != 0;
     private int BoolToInt(bool value) => value ? 1 : 0;
 
-    public Color GetColor(bool isTrue)
+    public Color GetColor(bool isTrue, Color color)
     {
         float alpha = isTrue ? 1.0f : 0.5f;
-        return new Color(1.0f, 1.0f, 1.0f, alpha);
+        return new Color(color.r, color.g, color.b, alpha);
     }
 }

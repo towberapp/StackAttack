@@ -40,7 +40,7 @@ public class GameOverManager : MonoBehaviour
 
         // checkads
         bool checkAds = adMobManager.CheckLoadedAds();
-        if (checkAds)
+        if (checkAds && MainConfig.playerY <= 7)
         {
             PreGameOverUI.SetActive(true);
             showAdsButton.interactable = true;

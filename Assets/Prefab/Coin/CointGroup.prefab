@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fa07cd4409e9ef84b94753e2b2797d57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f916d2ee24defa14584bba32effe4ad0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite:
-  - {fileID: 21300000, guid: fa07cd4409e9ef84b94753e2b2797d57, type: 3}
-  - {fileID: 21300000, guid: b813f8f7ce770254585a1edcb96d711f, type: 3}
-  - {fileID: 21300000, guid: 2185ba83cbafdea4a82300ebe026aee0, type: 3}
+  - {fileID: 21300000, guid: f916d2ee24defa14584bba32effe4ad0, type: 3}
+  - {fileID: 21300000, guid: 849b3d38c24614e43ad457248126c718, type: 3}
+  - {fileID: 21300000, guid: ec49d191730c18a4287a6e076306e459, type: 3}
   piupiu: {fileID: 8915500580573861359, guid: 9d11447644b0e0842a7edb034fe1ac72, type: 3}
   piupiuRed: {fileID: 8915500580573861359, guid: 67f17026538fd5843a4c543b23a26459, type: 3}
 --- !u!95 &4636218775747563826
@@ -143,7 +143,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33333334, y: 0.33333334}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.33333334, y: 0.33333334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

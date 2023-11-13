@@ -96,8 +96,11 @@ public class BonusController : MonoBehaviour
 
     public void CheckActivatedBonus(BonusTypeSO bonus)
     {
-        if (bonus.name == "Time")
+        if (bonus.objectName == "Time")
+        {
             bonusTimeEvent.Invoke();
+        }
+            
 
     }
 
@@ -111,7 +114,7 @@ public class BonusController : MonoBehaviour
 
     private void OnActiveBonus(BonusTypeSO arg0)
     {
-        Debug.Log("OnActiveBonus: " + arg0);
+        //Debug.Log("OnActiveBonus: " + arg0);
 
         bonusType = null;
         bonusStatus = Status.empty;
@@ -128,7 +131,7 @@ public class BonusController : MonoBehaviour
 
     private void OnTakeBonus(BonusTypeSO arg0)
     {
-        Debug.Log("OnTakeBonus: " + arg0);
+        //Debug.Log("OnTakeBonus: " + arg0);
 
         bonusType = arg0;
         bonusStatus = Status.taken;
