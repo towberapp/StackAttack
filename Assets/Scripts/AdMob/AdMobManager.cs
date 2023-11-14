@@ -6,8 +6,10 @@ public class AdMobManager : MonoBehaviour
 {    
     private RewardedAd _rewardedAd;
 
-    //private string _adUnitId = "ca-app-pub-1859015684244712/1673516659";
-    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // DEMO
+    [SerializeField] private bool isDemoAds = true;
+
+    [SerializeField] private string _adUnitId = "ca-app-pub-1859015684244712/1673516659";
+    [SerializeField] private string _adUnitIdDemo = "ca-app-pub-3940256099942544/5224354917"; // DEMO
 
     private void Start()
     {
@@ -30,9 +32,16 @@ public class AdMobManager : MonoBehaviour
 
         Debug.Log("Loading the rewarded ad.");       
 
-        var adRequest = new AdRequest();        
+        var adRequest = new AdRequest();
 
-        RewardedAd.Load(_adUnitId, adRequest,
+        string adsRewarderId;
+        if (isDemoAds)
+            adsRewarderId = _adUnitIdDemo;
+        else
+            adsRewarderId = _adUnitId;
+
+
+        RewardedAd.Load(adsRewarderId, adRequest,
             (RewardedAd ad, LoadAdError error) =>
             {                
 
