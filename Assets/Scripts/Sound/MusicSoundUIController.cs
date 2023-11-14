@@ -16,6 +16,16 @@ public class MusicSoundUIController : MonoBehaviour
     [SerializeField] private Image musicButton;
     [SerializeField] private Image soundButton;
 
+    [Header("AudioIconSprite")]
+    [SerializeField] private Sprite musicOn;
+    [SerializeField] private Sprite musicOff;
+    [SerializeField] private Sprite effectOn;
+    [SerializeField] private Sprite effectOff;
+
+    [Header("AudioIcon")]
+    [SerializeField] private Image musicIcon;
+    [SerializeField] private Image effectIcon;
+
     private string musicKey = "music";
     private string soundKey = "sound";
 
@@ -63,17 +73,28 @@ public class MusicSoundUIController : MonoBehaviour
         musicEvent.Invoke(isMusic);
         soundEvent.Invoke(isSound);
 
-        musicSource.mute = !isMusic;        
+
+        if (isMusic)
+        {
+            musicIcon.sprite = musicOn;
+            musicSource.mute = false;
+        } else
+        {
+            musicIcon.sprite = musicOff;
+            musicSource.mute = true;
+        }
 
         if (isSound)
         {
             //Debug.Log("SOUND ON");
             audioMixer.SetFloat("Vol", 0f);
+            effectIcon.sprite = effectOn;
         }            
         else
         {
             //Debug.Log("SOUND OFF");
             audioMixer.SetFloat("Vol", -80f);
+            effectIcon.sprite = effectOff;
         }
             
 
