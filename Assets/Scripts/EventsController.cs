@@ -8,6 +8,7 @@ public class EventsController : MonoBehaviour
 {
     // GameStatus
     public static UnityEvent BeforeGameOverEvent = new();
+    public static UnityEvent StartBeforeGameOverEvent = new();
     public static UnityEvent GameOverEvent = new();
     public static UnityEvent StartEvent = new();
     public static UnityEvent<int> PreStartEvent = new();
@@ -58,6 +59,19 @@ public class EventsController : MonoBehaviour
     public static UnityEvent revarderFail = new();
     public static UnityEvent revarderClose = new();
     public static UnityEvent revarderShow = new();
+
+    private void Awake()
+    {
+        StartBeforeGameOverEvent.AddListener(OnBeforeDeth);
+    }
+
+    private void OnBeforeDeth()
+    {
+        Invoke("GameOver", 1.5f);
+    }
+
+    private void GameOver() => BeforeGameOverEvent.Invoke();
+
 
     private void OnDestroy()
     {

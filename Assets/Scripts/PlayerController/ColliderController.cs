@@ -29,30 +29,18 @@ public class ColliderController : MonoBehaviour
 
                 } else
                 {
-                    Debug.Log("Start Deth in fly");
-                    SystemStatic.isStartGame = false;
-                    DeletePlayer();
-
-                    Invoke("GameOver", 1.5f);                    
-
-                    // удалим игрока
-                    //DeletePlayer();
-                    EventsController.playerDestroyAnimationEvent.Invoke();
+                    Debug.Log("Start Deth in fly Collider");
+                    GridController.StartDethPlayer();
 
                 }
             } else
             {
-                Debug.Log("Start Deth");
-                SystemStatic.isStartGame = false;
-
-                DeletePlayer();
-
-                Invoke("GameOver", 1.5f);                                
-                EventsController.playerDestroyAnimationEvent.Invoke();
+                Debug.Log("Start Deth Collider");
+                GridController.StartDethPlayer();
             }
     }
 
-    private void DeletePlayer()
+/*    private void DeletePlayer()
     {
         Vector2Int posPlayer = new Vector2Int(MainConfig.playerX, MainConfig.playerY);
         GameObject player = GridController.blockGrid[posPlayer.x, posPlayer.y];
@@ -69,14 +57,17 @@ public class ColliderController : MonoBehaviour
             Debug.Log($"Try Del player -> pos: {posPlayer}, obj: {player}");
             Debug.LogWarning("Ошибка удаления игрока");
         }           
-    }
+    }*/
 
-    private void GameOver()
+    /*private void StartDethPlayer()
     {
-        //EventsController.GameOverEvent.Invoke();
+        SystemStatic.isStartGame = false;
+        GridController.DeletePlayer();
+        EventsController.StartBeforeGameOverEvent.Invoke();
+        EventsController.playerDestroyAnimationEvent.Invoke();
+    }*/
 
-        EventsController.BeforeGameOverEvent.Invoke();
-    }
+
 
     
 }

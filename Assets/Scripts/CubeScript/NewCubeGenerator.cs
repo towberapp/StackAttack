@@ -21,7 +21,7 @@ public class NewCubeGenerator : MonoBehaviour
     private float time = 0.0f;
     private int lastRand = -1;
 
-    private bool stopCran = false;
+    [SerializeField] private bool stopCran = false;
 
      
     private void Update()
@@ -180,7 +180,7 @@ public class NewCubeGenerator : MonoBehaviour
 
         for (int x = 0; x < GridController.xPole; x++)
         {
-            if (GridController.mainGrid[x, GridController.yPole - 1] == 1)
+            if (GridController.mainGrid[x, GridController.yPole - 2] == 1)
             {
                 count++;
             } else

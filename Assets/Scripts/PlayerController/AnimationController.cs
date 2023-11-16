@@ -41,7 +41,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnDestroyPers()
     {
-        Debug.Log("ANIM -> DAMAGE BOX");
+        //Debug.Log("ANIM -> DAMAGE BOX");
         
         anim.SetBool("Off", false);
         anim.SetBool("Idle", false);
@@ -55,7 +55,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnBlockMoove(bool arg0)
     {
-        Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
+       // Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
 
         anim.SetBool("BlockMoove", arg0);
         
@@ -91,11 +91,13 @@ public class AnimationController : MonoBehaviour
     {
         //if (currentStatus == Status.Idle) return;
 
-        Debug.Log("ANIM -> IDLE");   
+        //Debug.Log("ANIM -> IDLE");   
                 
         anim.SetBool("Idle", true);
         anim.SetBool("BlockMoove", false);
         anim.SetBool("Run", false);
+
+        FlipPlayer(0);
 
         currentStatus = Status.Idle;
 
@@ -105,7 +107,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnRun()
     {
-        Debug.Log("ANIM -> RUN");
+        //Debug.Log("ANIM -> RUN");
 
         if (currentStatus == Status.Run) return;
         if (currentStatus == Status.Jump) return;
@@ -140,7 +142,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnJump(int direct)
     {
-        Debug.Log("ANIM -> JUMP");
+        //Debug.Log("ANIM -> JUMP");
 
 
         if (currentStatus == Status.Jump) return;
