@@ -8,6 +8,7 @@ public class BonusUIButton : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private Button button;
+    [SerializeField] private GameObject buttonGO;
 
     BonusTypeSO bonusType;
 
@@ -15,10 +16,12 @@ public class BonusUIButton : MonoBehaviour
     {
         BonusController.onTakeBonus.AddListener(OnTakeBonus);
         button.interactable = false;
+        buttonGO.SetActive(false);
     }
 
     private void OnTakeBonus(BonusTypeSO bonus)
     {
+        buttonGO.SetActive(true);
         button.interactable = true;
 
         image.enabled = true;
@@ -45,5 +48,6 @@ public class BonusUIButton : MonoBehaviour
         image.sprite = null;
         bonusType = null;
         button.interactable = false;
+        buttonGO.SetActive(false);
     }
 }

@@ -110,7 +110,7 @@ public class GridController : MonoBehaviour
             GameObject block = blockGrid[blockPos.x, blockPos.y];
             IndividualBlockControl 
                 individualBlockControl = block.GetComponent<IndividualBlockControl>();
-                individualBlockControl.MoveBlock(direction);
+                individualBlockControl.MoveBlock(direction, true);
         }
 
     }
@@ -184,7 +184,7 @@ public class GridController : MonoBehaviour
         mainGrid[x + move.x, y + move.y] = type;
         mainGrid[x, y] = 0;
 
-        //  ShowGrid();
+        //ShowGrid();
 
         CheckForNexLevel();
         CheckForGameOver();
@@ -194,6 +194,8 @@ public class GridController : MonoBehaviour
 
     public static void DeleteCube(int x, int y)
     {
+        Debug.Log($"Delete Cube -> {x},{y}");
+
         blockGrid[x, y] = null;
         mainGrid[x, y] = 0;
 
@@ -211,6 +213,33 @@ public class GridController : MonoBehaviour
         Debug.Log("-------------------");
     }
 
+   public static void StartDethPlayer()
+    {
+        SystemStatic.isStartGame = false;
+        DeletePlayer();
+        EventsController.StartBeforeGameOverEvent.Invoke();
+        EventsController.playerDestroyAnimationEvent.Invoke();
+    }
+
+
+    public static void DeletePlayer()
+    {
+        Vector2Int posPlayer = new (MainConfig.playerX, MainConfig.playerY);
+        GameObject player = blockGrid[posPlayer.x, posPlayer.y];
+
+        if (player == null) return;
+
+        if (player.CompareTag("Player"))
+        {
+            Debug.Log($"Try Del player -> pos: {posPlayer}, obj: {player}");
+            DeleteCube(posPlayer.x, posPlayer.y);
+        }
+        else
+        {
+            Debug.Log($"Try Del player -> pos: {posPlayer}, obj: {player}");
+            Debug.LogWarning("Ошибка удаления игрока");
+        }
+    }
 
 
     private static void CheckForGameOver()

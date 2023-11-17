@@ -6,10 +6,11 @@ public class AdMobManager : MonoBehaviour
 {    
     private RewardedAd _rewardedAd;
 
-    [SerializeField] private bool isDemoAds = true;
-
+    [Header("C вознаграждением")]
     [SerializeField] private string _adUnitId = "ca-app-pub-1859015684244712/1673516659";
-    [SerializeField] private string _adUnitIdDemo = "ca-app-pub-3940256099942544/5224354917"; // DEMO
+
+    [Header("C вознаграждением демо")]
+    [SerializeField] private string _adUnitIdDemo = "ca-app-pub-3940256099942544/5224354917"; // DEMO    
 
     private void Start()
     {
@@ -35,7 +36,8 @@ public class AdMobManager : MonoBehaviour
         var adRequest = new AdRequest();
 
         string adsRewarderId;
-        if (isDemoAds)
+
+        if (Application.isEditor)
             adsRewarderId = _adUnitIdDemo;
         else
             adsRewarderId = _adUnitId;

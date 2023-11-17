@@ -35,10 +35,10 @@ public class PerimetrBlockController : MonoBehaviour
         }
 
         // folderTop 
-        Instantiate(cornerCube, new Vector2(-2, GridController.yPole), Quaternion.identity, folderTop.transform);
-        Instantiate(cornerCube, new Vector2(GridController.xPole-1, GridController.yPole), Quaternion.identity, folderTop.transform);
+        Instantiate(cornerCube, new Vector2(-1, GridController.yPole), Quaternion.identity, folderTop.transform);
+        Instantiate(cornerCube, new Vector2(GridController.xPole, GridController.yPole), Quaternion.identity, folderTop.transform);
 
-        for (int i = -1; i < GridController.xPole-1; i++)
+        for (int i = 0; i < GridController.xPole; i++)
         {
             Instantiate(wallCubeTop, new Vector2(i, GridController.yPole), Quaternion.identity, folderTop.transform);
         }

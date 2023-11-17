@@ -8,18 +8,24 @@ public class SpecialTNTControl : MonoBehaviour
     private Animator anim;
     [SerializeField] private GameObject fx;
     MoveByGrid moveByGrid;
-
+    AudioSource audioSource;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         moveByGrid = GetComponent<MoveByGrid>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartAnim()
     {
         anim.Play("tnt");
         StartCoroutine(fxStart());
+    }
+
+    public void PlayAudio()
+    {
+        audioSource?.Play();
     }
 
     IEnumerator fxStart()
@@ -35,68 +41,66 @@ public class SpecialTNTControl : MonoBehaviour
             BoomCobe();
 
             EventsController.tntBlowUp.Invoke();
-
-            yield return new WaitForSeconds(2f);
-            Destroy(obj);
         }
     }
 
     private void BoomCobe()
     {
+        Debug.Log("BOOM FUNCTION");
+
+        List<Vector2Int> listGO = new List<Vector2Int>();
         Vector2Int myPos = new(moveByGrid.x, moveByGrid.y);
-        Vector2Int left = myPos + Vector2Int.left;
-        Vector2Int right = myPos + Vector2Int.right;
-        Vector2Int up = myPos + Vector2Int.up;
-        Vector2Int leftUp = myPos + Vector2Int.left + Vector2Int.up;
-        Vector2Int rightUp = myPos + Vector2Int.right + Vector2Int.up;
 
-        Vector2Int leftDown = myPos - Vector2Int.left + Vector2Int.up;
-        Vector2Int rightDown = myPos - Vector2Int.right + Vector2Int.up;
-        Vector2Int down = myPos - Vector2Int.up;
+        for (int xOffset = -1; xOffset <= 1; xOffset++)
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+            {
+                Vector2Int offset = new(myPos.x+xOffset, myPos.y+yOffset);
 
-        DeleteCube(left);
-        DeleteCube(right);
-        DeleteCube(up);
-        DeleteCube(leftUp);
-        DeleteCube(rightUp);
+                if (GridController.IsOutOfRange(offset)) continue;
 
-        if (down.y >= 0) 
-        { 
-            DeleteCube(down);
-            DeleteCube(leftDown);
-            DeleteCube(rightDown);
-        }
+                int type = GridController.mainGrid[offset.x, offset.y];
 
-        DeleteCube(myPos);
+                Debug.Log("TYPE: " + type);
 
-    }
+                if (type >0)
+                {
+                    Debug.Log("Add POS: " + offset);
+                    listGO.Add(offset);                    
+                }                             
+            }
 
-    private void DeleteCube(Vector2Int pos) 
-    {
+        Debug.Log("ADD GAME OBJ");
 
-        if (GridController.IsOutOfRange(pos)) return;
-        
-        if (pos.x == MainConfig.playerX && pos.y == MainConfig.playerY)
+        List<GameObject> listObject = new();
+        for (int i = 0; i < listGO.Count; i++)
         {
-            //gameOver
-            EventsController.playerDestroyAnimationEvent.Invoke();
-            EventsController.playerBoomAnimationEvent.Invoke();
+            if (GridController.IsOutOfRange(listGO[i])) continue;
+            if (GridController.mainGrid[listGO[i].x, listGO[i].y] == 0) continue;
+            if (GridController.blockGrid[listGO[i].x, listGO[i].y] == null) continue;
 
-            Invoke("GameOver", 1f);
-            return;            
+            Debug.Log("ADD OBJ: " + GridController.blockGrid[listGO[i].x, listGO[i].y].name);
+
+            listObject.Add(GridController.blockGrid[listGO[i].x, listGO[i].y]);
         }
- 
-        if (!GridController.CheckCubeInArray(pos)) return;
 
-        GameObject obj = GridController.blockGrid[pos.x, pos.y];
-        Destroy(obj);
-        GridController.DeleteCube(pos.x, pos.y);
-    }
+        Debug.Log("TRY DESTROY");
 
+        for (int i = 0; i < listObject.Count; i++)
+        {
+            if (listObject[i].TryGetComponent<IndividualBlockControl>(out var individualBlockControl))
+            {
+                Debug.Log("START DESTRY CUBE: " + listObject[i].name);
+                individualBlockControl.DestroyCube();
+            }
+                
 
-    private void GameOver()
-    {
-        EventsController.GameOverEvent.Invoke();
+            if (listObject[i].TryGetComponent<MoveController>(out _))
+            {
+                    Debug.Log("START DESTRY PLAYER");
+                    GridController.StartDethPlayer();                  
+            }
+                
+        }
     }
 
 }
