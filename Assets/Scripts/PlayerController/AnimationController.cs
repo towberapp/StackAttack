@@ -55,7 +55,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnBlockMoove(bool arg0)
     {
-       // Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
+        //Debug.Log("ANIM -> BLOCK MOOVE :" + arg0);
 
         anim.SetBool("BlockMoove", arg0);
         

@@ -23,6 +23,29 @@ public class FirebaseAnalityc : MonoBehaviour
         EventsController.revarderFail.AddListener(OnrevarderFail);
         EventsController.revarderClose.AddListener(OnrevarderClose);
         EventsController.revarderShow.AddListener(OnShow);
+
+        //interstisial
+        EventsController.interstisialDone.AddListener(OnDoneInterstisial);
+        EventsController.interstisialClick.AddListener(OnClickInterstisial);        
+    }
+
+
+    private void OnClickInterstisial()
+    {
+        FirebaseAnalytics.LogEvent(
+            "AdMob",
+            "Interstisial",
+            "Click"
+        );
+    }
+
+    private void OnDoneInterstisial()
+    {
+        FirebaseAnalytics.LogEvent(
+            "AdMob",
+            "Interstisial",
+            "Done"
+        );
     }
 
     private void OnShow()

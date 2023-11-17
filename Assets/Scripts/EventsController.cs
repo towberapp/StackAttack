@@ -60,6 +60,11 @@ public class EventsController : MonoBehaviour
     public static UnityEvent revarderClose = new();
     public static UnityEvent revarderShow = new();
 
+    //interstisial
+    public static UnityEvent interstisialDone = new();
+    public static UnityEvent interstisialClick = new();
+    public static UnityEvent interstisialShow = new();
+
     private void Awake()
     {
         StartBeforeGameOverEvent.AddListener(OnBeforeDeth);

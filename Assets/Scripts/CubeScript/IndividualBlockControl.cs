@@ -82,7 +82,7 @@ public class IndividualBlockControl : MonoBehaviour
         bool isCanMoove = true;
 
         // bonus blocl msg
-        if (GetComponent<BonusBlockScript>() != null && isEmptyUp)
+        if (GetComponent<BonusBlockScript>() != null && isEmptyUp && auto)
         {
             BonusBlockScript bonusBlockScript = GetComponent<BonusBlockScript>();
             bonusBlockScript.TryTouchBonusBlock();
@@ -113,7 +113,7 @@ public class IndividualBlockControl : MonoBehaviour
      
 
 
-        if (isEmpty && isEmptyUp && isCanMoove)
+        if (isEmpty && isEmptyUp && isCanMoove && auto)
         {
             EventsController.blockMoove.Invoke(true);
             GridController.UpdateGrid(moveByGrid.x, moveByGrid.y, direction);

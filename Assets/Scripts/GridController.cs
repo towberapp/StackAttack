@@ -110,7 +110,7 @@ public class GridController : MonoBehaviour
             GameObject block = blockGrid[blockPos.x, blockPos.y];
             IndividualBlockControl 
                 individualBlockControl = block.GetComponent<IndividualBlockControl>();
-                individualBlockControl.MoveBlock(direction);
+                individualBlockControl.MoveBlock(direction, true);
         }
 
     }
@@ -184,7 +184,7 @@ public class GridController : MonoBehaviour
         mainGrid[x + move.x, y + move.y] = type;
         mainGrid[x, y] = 0;
 
-        ShowGrid();
+        //ShowGrid();
 
         CheckForNexLevel();
         CheckForGameOver();
